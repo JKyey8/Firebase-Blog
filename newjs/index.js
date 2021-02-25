@@ -1,53 +1,78 @@
 //getting data from firebase
-window.addEventListener("DOMContentLoaded", () => getblogs());
+
 const ref = db.collection("posts")
+
 const blogcontainer = document.getElementById("blogposts")
 
 
-async function getblogs(){
-const data = await ref.get();
+
 //real time data
 db.collection("posts").onSnapshot((querySnapshot) => {
 blogcontainer.innerHTML = "";
 var posts
+
 querySnapshot.forEach((doc) => {
 posts = doc.data()
 let ids = doc.id
-displayBlogs(posts, ids)
-    
-});
 
+
+
+
+
+
+displayBlogs(posts, ids)
+   getLikebtn(ids, posts)
+
+});
 
 })
 
 
+// liking posts
 
 
 
 
 
 
+async function getLikebtn(ids, posts){
+
+document.getElementById(ids).addEventListener("click", () => {
 
 
 
+likePost(ids, posts)
 
 
-
-
-
+}
+)
 
 
 
 }
 
 
-function displayBlogs(doc, ids,) {
+function likePost(ids, doc){
+db.collection("posts").doc(ids).update({
+likes:doc.likes + 1
+
+
+})
+
+}
 
 
 
+
+
+
+
+
+
+
+
+function displayBlogs(doc, ids) {
 //dispalay the blogs
-
-
 var div = document.createElement("div");
 var blogtitle = document.createElement("h2");
 var blogtext = document.createElement("p");
@@ -57,12 +82,12 @@ var deletebtn = document.createElement("button")
 addlike.className = "addlikes";
 deletebtn.className = "deletebtns";
 deletebtn.id = "deletebtn";
-addlike.id = "likebtn";   
+addlike.id = ids;   
 bloglikes.className = "textlikes";
 blogtitle.className = "textheader";
 blogtext.className = "textzone";
 div.className = "blogs";
-div.id = ids
+
 addlike.innerHTML = "Like";
 blogtext.innerHTML = doc.body;
 bloglikes.innerHTML = doc.likes + " likes"
@@ -79,12 +104,9 @@ if(blogtitle.innerHTML == "undefined"){
 
 div.remove();
 
-
-
 }
 
 }
-
 
 
 

@@ -1,0 +1,123 @@
+use <script src=""> to ad a javascript things
+use alert() for alert window on a page
+variables are case sensitive
+must delcare function and all stuff for funtion goes inside curly brackets then you call it with its name 
+i the parenthesis of a function, you can use variabels then in the fuction, say what the variables are and then when calling it, plut values in the parenthesis
+if needs parenthesis and then squggly brackets but also can use else then more brackets
+use double == to check variables so var food = :"APPLE" then if (food == "APPLE")
+order goes if, else ifs, then else
+use ++ to make things go up on their owne and use -- to go down inside a loop
+for loop is easier as everything is in the parenthesis
+<= is less than or equal to..... => is greater than or equal to
+use && for multiple thigns in a if statment parenthesis
+the window represents the browsers window so scrolling and resizing are attributed to it. You can use (
+window.open() - open a new window
+window.close() - close the current window
+window.moveTo() - move the current window
+window.resizeTo() - resize the current window)
+To make thigns change on scorll, use window.scroll then a function to declare what function should happen on teh scroll then use a if statement with document.body.scrollTop then your paramenter. for example >10 means if page is scrolled 10 px then whatevr you need will happen.
+window.onscroll can hold more than one function
+documnet.body will use anything that is attributed to the body of the webpage
+use window.scrollTo({top or bottom:#, behavior smooth') for smooth scrolling to to button
+use == to check if two things are same so like 2=="2" but then 2==="2" doesnt work. They have ti be the same type of things and exactly the same so "pie"==="pie"
+JAVASCRIPT OPERATORS (if x=5)
+==	equal to	x == 8	false	
+x == 5	true	
+x == "5"	true	
+===	equal value and equal type	x === 5	true	
+x === "5"	false	
+!=	not equal	x != 8	true	
+!==	not equal value or not equal type	x !== 5	false	
+x !== "5"	true	
+x !== 8	true	
+>	greater than	x > 8	false	
+<	less than	x < 8	true	
+>=	greater than or equal to	x >= 8	false	
+<=	less than or equal to	x <= 8	true
+JAVASCRIPT OPERATORS (IF x=6 and y=3)
+&&	and	(x < 10 && y > 1) is true	
+||	or	(x == 5 || y == 5) is false	
+!	not	!(x == y) is true
+ If you do somthing similar to {var voteable = (age < 18) ? "Too young":"Old enough";} then if the input you get is over 18, it will display the 2nd option so old enough'use onload="" to make somethign happen right when webpage is loaded
+you can link variables to {
+new Date(); - will print out all date information
+ today.getHours(); - will print out hours
+ today.getMinutes(); - will print out minutes
+ today.getSeconds(); - will print out current getSeconds}
+ use setTimeout(function,milliseconds); to make a function run after certain period of time.  setInterval will do the same thing but will repeat. to make something stop, use clearTimeout(variable you want to stop)
+ use onmouseover and onmouseout to do same thing as hover
+ onmousedown is for if hold and click then onmouseup is when it is released
+use documnet.querySelector(){in parenthesis put a css id or class name} to selcect the first element with that id or class...if you want to get all, use.querySelectorAll
+you can read what is inside of a elemnt(usually it will eb text) and assign it to a variable by getting the element then use.innerHTML
+document.createElement('') can be used to make a new element and in parenthesis put type of elemtn you want to make. use document.createtextnode to make a place where you can add text
+appenChild=() will add elemtns or children to stuff so you can use it to add a p to a div
+to remove elemets use.remove child in same fashion to appenchid()
+use onsubmit=() to submit a form and call a function
+use .value == "" to check the value of a form in an if statemnet
+you can use return false to interrupt the submit 
+on teh click of a button, you can use window.location="" to change where hte window goes
+use.length to get the # of letters in a string or if you have a variable attache to many items, i will display # of items with that name
+window.open() - open a new window
+window.close() - close the current window
+window.moveTo() - move the current window
+window.resizeTo() - resize the current window
+window.innerHeight - the inner height of the browser window (in pixels)
+window.innerWidth - the inner width of the browser window (in pixels)
+screen.width-displays entire width of users screen
+screen.height-displays entire height of users screen
+screen.availWidth-displays only the available width that can be used for the webpage
+screen.availHeight-displays available height of webpage on users screen
+window.location.href returns the href (URL) of the current page
+window.location.hostname returns the domain name of the web host
+window.location.pathname returns the path and filename of the current page
+window.location.protocol returns the web protocol used (http: or https:)
+window.location.assign() loads a new document
+history.back() - same as clicking back in the browser
+history.forward() - same as clicking forward in the browser
+window.prompt("sometext","defaultText")- will appear as a popup adn user has to click ok which will return value entered
+window.confirm("sometext");- user has to press either ok or cancel{you can check if it returns as true or false by doing if(confirm(text)) }
+alert just has ok
+
+use this.value to return whatever value is put in to the function
+
+use .classlist.add(ame of class) to add aclass to a element and use .remove to remove it
+use .classlist.toggle("") to toggle betwwen a predfined css element
+
+use .getboundingClientRect(); function to get size of element and positon relative to viewport. if you set it to variable, ten you can do.top to get distance from top of viewport
+
+use .scrollIntoView to make an element be scrolled into view when the fucntion is called
+
+
+
+// check direction of scroll {
+var scrollableElement = document.body; //document.getElementById('scrollableElement');
+
+scrollableElement.addEventListener('wheel', checkScrollDirection);
+
+// @ts-ignore
+function checkScrollDirection(event) {
+  if (checkScrollDirectionIsUp(event)) {
+    console.log("Up")
+  } else {
+    console.log('Down');
+  }
+}
+//@ts-ignore
+function checkScrollDirectionIsUp(event) {
+  if (event.wheelDelta) {
+    return event.wheelDelta > 0;
+  }
+  return event.deltaY < 0;
+}
+
+
+
+}
+
+
+
+use window.pageXoffset for how far horizontal form top left
+use window.pageYoffset for distance from top
+(can also use offset top, bottom, left, right on any element)
+
+use .includes() to check fi a sting has a certain wordor words///its similar to crtl F

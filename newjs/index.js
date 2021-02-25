@@ -1,9 +1,7 @@
 //getting data from firebase
 
 const ref = db.collection("posts")
-
 const blogcontainer = document.getElementById("blogposts")
-
 
 
 //real time data
@@ -15,64 +13,28 @@ querySnapshot.forEach((doc) => {
 posts = doc.data()
 let ids = doc.id
 
-
-
-
-
-
 displayBlogs(posts, ids)
-   getLikebtn(ids, posts)
+getLikebtn(ids, posts)
 
 });
 
-})
+});
 
 
 // liking posts
-
-
-
-
-
-
-async function getLikebtn(ids, posts){
-
+async function getLikebtn(ids, doc){
 document.getElementById(ids).addEventListener("click", () => {
-
-
-
-likePost(ids, posts)
-
-
-}
-)
-
-
-
-}
-
-
-function likePost(ids, doc){
 db.collection("posts").doc(ids).update({
 likes:doc.likes + 1
-
-
 })
-
+}
+)
 }
 
 
 
-
-
-
-
-
-
-
-
-function displayBlogs(doc, ids) {
 //dispalay the blogs
+function displayBlogs(doc, ids) {
 var div = document.createElement("div");
 var blogtitle = document.createElement("h2");
 var blogtext = document.createElement("p");

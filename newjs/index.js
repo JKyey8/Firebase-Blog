@@ -14,19 +14,40 @@ posts = doc.data()
 let ids = doc.id
 
 displayBlogs(posts, ids)
-getLikebtn(ids, posts)
-
+likePost(ids, posts)
+deletePost(ids, posts)
+searchBlog(posts, ids)
+console.log(ids)
 });
 
 });
 
 
 // liking posts
-async function getLikebtn(ids, doc){
-document.getElementById(ids).addEventListener("click", () => {
+let isLiked = false
+function likePost(ids, doc){
+
+document.getElementById("blog-" + ids).addEventListener("click", () => {
+
+if(!isLiked){
 db.collection("posts").doc(ids).update({
 likes:doc.likes + 1
 })
+isLiked = true
+
+} else {
+db.collection("posts").doc(ids).update({
+likes:doc.likes - 1
+})
+isLiked = false
+
+
+
+
+}
+
+
+
 }
 )
 }
@@ -43,13 +64,13 @@ var addlike = document.createElement("button");
 var deletebtn = document.createElement("button")
 addlike.className = "addlikes";
 deletebtn.className = "deletebtns";
-deletebtn.id = "deletebtn";
+deletebtn.id = ids;
 addlike.id = ids;   
 bloglikes.className = "textlikes";
 blogtitle.className = "textheader";
 blogtext.className = "textzone";
 div.className = "blogs";
-
+div.id = "blog-" + ids
 addlike.innerHTML = "Like";
 blogtext.innerHTML = doc.body;
 bloglikes.innerHTML = doc.likes + " likes"
@@ -69,6 +90,37 @@ div.remove();
 }
 
 }
+
+
+//delete posts
+
+async function deletePost(ids, doc){
+document.getElementById(ids).addEventListener("click", () => {
+db.collection("posts").doc(ids).delete()
+}
+)
+}
+
+
+
+//search posts
+async function searchBlog(doc, ids){
+document.getElementById("searchinput").addEventListener("keyup", () => {
+var searchinput = document.querySelector("#searchinput").value;
+
+
+if(doc.title.includes(searchinput) == false  ){
+document.getElementById("blog-" + ids).style.display = "none";
+} else (
+document.getElementById("blog-" + ids).style.display = "block"
+
+)
+
+})
+}
+
+
+
 
 
 

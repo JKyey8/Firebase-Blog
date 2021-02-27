@@ -1,5 +1,5 @@
 //getting data from firebase
-
+let db;
 const ref = db.collection("posts")
 const blogcontainer = document.getElementById("blogposts")
 
@@ -27,13 +27,14 @@ console.log(ids)
 let isLiked = false
 function likePost(ids, doc){
 
-document.getElementById("blog-" + ids).addEventListener("click", () => {
+document.getElementById("likebtn" + ids).addEventListener("click", () => {
 
 if(!isLiked){
 db.collection("posts").doc(ids).update({
 likes:doc.likes + 1
 })
 isLiked = true
+document.getElementById("likebtn" + ids).classList.add("likebtnliked")
 
 } else {
 db.collection("posts").doc(ids).update({
@@ -64,8 +65,8 @@ var addlike = document.createElement("button");
 var deletebtn = document.createElement("button")
 addlike.className = "addlikes";
 deletebtn.className = "deletebtns";
-deletebtn.id = ids;
-addlike.id = ids;   
+deletebtn.id = "deletebtn" + ids;
+addlike.id = "likebtn" + ids;   
 bloglikes.className = "textlikes";
 blogtitle.className = "textheader";
 blogtext.className = "textzone";
@@ -95,7 +96,7 @@ div.remove();
 //delete posts
 
 async function deletePost(ids, doc){
-document.getElementById(ids).addEventListener("click", () => {
+document.getElementById("deletebtn" + ids).addEventListener("click", () => {
 db.collection("posts").doc(ids).delete()
 }
 )
@@ -106,6 +107,7 @@ db.collection("posts").doc(ids).delete()
 //search posts
 async function searchBlog(doc, ids){
 document.getElementById("searchinput").addEventListener("keyup", () => {
+//@ts-ignore
 var searchinput = document.querySelector("#searchinput").value;
 
 

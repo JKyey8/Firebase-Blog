@@ -1,16 +1,8 @@
 //same tmestamp as firestore server
-let firebase;
-
-
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 
-
-
-
 document.getElementById("newitem").addEventListener("submit", newBlog)
-
-
 
 
 

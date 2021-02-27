@@ -1,5 +1,7 @@
 //getting data from firebase
-let db;
+
+
+
 const ref = db.collection("posts")
 const blogcontainer = document.getElementById("blogposts")
 

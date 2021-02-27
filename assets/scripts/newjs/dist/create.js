@@ -35,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 //same tmestamp as firestore server
-var firebase;
 var timestamp = firebase.firestore.FieldValue.serverTimestamp;
 document.getElementById("newitem").addEventListener("submit", newBlog);
 function newBlog(e) {

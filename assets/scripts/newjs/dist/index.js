@@ -40,29 +40,31 @@ var db = firebase.firestore();
 var ref = db.collection("posts");
 var blogcontainer = document.getElementById("blogposts");
 //real time data
-db.collection("posts").onSnapshot(function (querySnapshot) {
+db.collection("posts")
+    .orderBy("id", "desc")
+    .onSnapshot(function (querySnapshot) {
     blogcontainer.innerHTML = "";
     var posts;
     querySnapshot.forEach(function (doc) {
         posts = doc.data();
         var ids = doc.id;
+        console.log(doc.id);
         displayBlogs(posts, ids);
         likePost(ids, posts);
         deletePost(ids, posts);
         searchBlog(posts, ids);
-        console.log(ids);
     });
 });
 // liking posts
 var isLiked = false;
 function likePost(ids, doc) {
-    document.getElementById("likebtn" + ids).addEventListener("click", function () {
+    document.getElementById("likebtn-" + ids).addEventListener("click", function (e) {
         if (!isLiked) {
+            console.log(e);
             db.collection("posts").doc(ids).update({
                 likes: doc.likes + 1
             });
             isLiked = true;
-            document.getElementById("likebtn" + ids).classList.add("likebtnliked");
         }
         else {
             db.collection("posts").doc(ids).update({
@@ -82,8 +84,8 @@ function displayBlogs(doc, ids) {
     var deletebtn = document.createElement("button");
     addlike.className = "addlikes";
     deletebtn.className = "deletebtns";
-    deletebtn.id = "deletebtn" + ids;
-    addlike.id = "likebtn" + ids;
+    deletebtn.id = "deletebtn-" + ids;
+    addlike.id = "likebtn-" + ids;
     bloglikes.className = "textlikes";
     blogtitle.className = "textheader";
     blogtext.className = "textzone";
@@ -108,7 +110,7 @@ function displayBlogs(doc, ids) {
 function deletePost(ids, doc) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            document.getElementById("deletebtn" + ids).addEventListener("click", function () {
+            document.getElementById("deletebtn-" + ids).addEventListener("click", function () {
                 db.collection("posts").doc(ids)["delete"]();
             });
             return [2 /*return*/];

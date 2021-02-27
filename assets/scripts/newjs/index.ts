@@ -3,11 +3,15 @@ let firebase;
 
 const db = firebase.firestore();
 const ref = db.collection("posts")
+
+
 const blogcontainer = document.getElementById("blogposts")
 
 
 //real time data
-db.collection("posts").onSnapshot((querySnapshot) => {
+db.collection("posts")
+.orderBy("id", "desc")
+.onSnapshot((querySnapshot) => {
 blogcontainer.innerHTML = "";
 var posts
 
@@ -15,28 +19,33 @@ querySnapshot.forEach((doc) => {
 posts = doc.data()
 let ids = doc.id
 
+console.log(doc.id)
+
+
+
 displayBlogs(posts, ids)
 likePost(ids, posts)
 deletePost(ids, posts)
 searchBlog(posts, ids)
-console.log(ids)
+
 });
 
 });
 
 
 // liking posts
-let isLiked = false
+let isLiked = false;
 function likePost(ids, doc){
 
-document.getElementById("likebtn" + ids).addEventListener("click", () => {
+document.getElementById("likebtn-" + ids).addEventListener("click", (e) => {
 
 if(!isLiked){
+console.log(e)
 db.collection("posts").doc(ids).update({
 likes:doc.likes + 1
-})
-isLiked = true
-document.getElementById("likebtn" + ids).classList.add("likebtnliked")
+});
+isLiked = true;
+
 
 } else {
 db.collection("posts").doc(ids).update({
@@ -44,18 +53,11 @@ likes:doc.likes - 1
 })
 isLiked = false
 
-
-
-
 }
-
-
 
 }
 )
 }
-
-
 
 //dispalay the blogs
 function displayBlogs(doc, ids) {
@@ -67,8 +69,8 @@ var addlike = document.createElement("button");
 var deletebtn = document.createElement("button")
 addlike.className = "addlikes";
 deletebtn.className = "deletebtns";
-deletebtn.id = "deletebtn" + ids;
-addlike.id = "likebtn" + ids;   
+deletebtn.id = "deletebtn-" + ids;
+addlike.id = "likebtn-" + ids;   
 bloglikes.className = "textlikes";
 blogtitle.className = "textheader";
 blogtext.className = "textzone";
@@ -94,11 +96,9 @@ div.remove();
 
 }
 
-
 //delete posts
-
 async function deletePost(ids, doc){
-document.getElementById("deletebtn" + ids).addEventListener("click", () => {
+document.getElementById("deletebtn-" + ids).addEventListener("click", () => {
 db.collection("posts").doc(ids).delete()
 }
 )
@@ -115,7 +115,9 @@ var searchinput = document.querySelector("#searchinput").value;
 
 if(doc.title.includes(searchinput) == false  ){
 document.getElementById("blog-" + ids).style.display = "none";
-} else (
+
+}
+ else (
 document.getElementById("blog-" + ids).style.display = "block"
 
 )

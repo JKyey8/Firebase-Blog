@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+
+  "target": "esnext",  
+"watch": true,
+"lib": ["DOM", "ESNext"],
+    "esModuleInterop": true, 
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+  }
+
+}

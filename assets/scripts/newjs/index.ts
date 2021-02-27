@@ -1,7 +1,7 @@
 //getting data from firebase
-import firebase from 'firebase';
-const db = firebase.firestore();
+let firebase;
 
+const db = firebase.firestore();
 const ref = db.collection("posts")
 const blogcontainer = document.getElementById("blogposts")
 

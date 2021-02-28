@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="/assets/styles/style.css">
+<link rel="stylesheet" type="text/css" href="/assets/styles/dist/style.css">
     <title>JSON server</title>
 </head>
 <body>
     
-<nav>
+<navbar>
+
+
+
+
+
 <h1>All Blogs</h1>
 <form id="searchbar">
   <div class=”search-box”>
@@ -17,14 +22,21 @@
   
    </div>
 </form>
+<div id="right-nav">
+<a href="/create.html">New Post</a>
 
-<a href="/create.html">Add a new blog</a>
-</nav>
+
+</div>
+</navbar>
+
+
+<section id="blogs-container">
 <div id="blogposts">
 
 <div id="noposts">Nothing was Found</div>
 
 </div>
+</section>
 
    <script>var exports = {};</script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->

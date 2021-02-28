@@ -58,9 +58,9 @@ db.collection("posts")
 // liking posts
 var isLiked = false;
 function likePost(ids, doc) {
-    document.getElementById("likebtn-" + ids).addEventListener("click", function (e) {
+    document.getElementById("likebtn-" + ids).addEventListener("click", function () {
         if (!isLiked) {
-            console.log(e);
+            document.getElementById("likebtn-" + ids).style.display = "none";
             db.collection("posts").doc(ids).update({
                 likes: doc.likes + 1
             });

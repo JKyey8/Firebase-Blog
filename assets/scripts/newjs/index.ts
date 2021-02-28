@@ -37,10 +37,10 @@ searchBlog(posts, ids)
 let isLiked = false;
 function likePost(ids, doc){
 
-document.getElementById("likebtn-" + ids).addEventListener("click", (e) => {
+document.getElementById("likebtn-" + ids).addEventListener("click", () => {
 
 if(!isLiked){
-console.log(e)
+document.getElementById("likebtn-" + ids).style.display = "none"
 db.collection("posts").doc(ids).update({
 likes:doc.likes + 1
 });

@@ -1,74 +1,110 @@
+
+@use "./_misc" as m;
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 /* base styles */
 *{
 box-sizing: border-box;
+margin: 0;
+padding: 0;
 }
+
+html{
+margin: 0;
+padding: 0;
+width: 100vw;
+height: 100vh;
+font-size: 16px;
+overflow-x:auto ;
+
+}
+
+
 body {
-  background: #eee;
+  background-color: m.$white;
   font-family: 'Roboto';
-  color: #444;
-  max-width: 960px;
-  margin: 100px auto;
-  padding: 10px;
+
+width: 100vw;
+height: 100vh;
+margin: 0;
+padding: 0;
+
 }
-nav {
+navbar {
+position: relative;
+top: 0px;
+right:0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+align-items: center;
+width: 100vw;
+border: 10px solid m.$yellow;
+border-radius: 20px;
+
+h1{
+
+color: m.$black;
 }
-nav h1 {
-  margin: 0;
-}
-nav a {
-  color: white;
+a {
+  color: m.$white;
   text-decoration: none;
-  background: #36cca2;
-  padding: 10px;
-  border-radius: 10px;
+  background: m.$blue;
+text-align: center;
+ border: 8px solid m.$blue ;
+border-radius: 10px;
+
 }
 form {
-  max-width: 500px;
+  width: 30vw;
 }
 input, textarea {
   display: block;
   margin: 16px 0;
   padding: 6px 10px;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid m.$blue;
   font-family: 'Roboto';
 }
-textarea {
-  min-height:200px;
+
+
+}
+
+#blogs-container{
+width: 75vw;
+display: flex;
+justify-content: space-around;
+
+
 }
 
 .blogs{
 display: block;
 position: relative;
-border: 5px solid red;
+border: 5px solid m.$purple;
 margin: 20px 4px;
+max-width: 55vw;
+border-radius: 20px;
+height: auto;
+min-height: 15vh;
 
 
 }
 
 .addlikes{
-border: 2px solid #36cca2;
+border: 2px solid m.$blue;
 position: absolute;
 top:30px;
 right: 20px;
 }
 
 
-.likebtnliked{
-border: 2px solid black ;
-background-color: #36cca2;
-color: white;
 
-}
 
 
 
 .deletebtns{
-border: 2px solid red;
+border: 2px solid m.$yellow;
 position: absolute;
 top: 75px;
 right: 20px;

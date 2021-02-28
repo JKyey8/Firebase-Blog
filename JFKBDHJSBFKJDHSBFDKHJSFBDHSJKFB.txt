@@ -1,3 +1,0 @@
-searchbar works now gotta not make it refresh page for everything
-
-make it so if firebase changes, text is automatically replaced

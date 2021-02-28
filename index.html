@@ -24,27 +24,27 @@
 </form>
 <div id="right-nav">
 <a href="/pages/create.html">New Post</a>
-<button>Log In</button>
-<button>Sign UP</button>
+<button  id="loginbtn">Log In</button>
+<button id="signupbtn">Sign Up</button>
 </div>
 </navbar>
-
-
+<div id="signup"></div>
+<div id="login"></div>
 <section id="blogs-container">
 <div id="blogposts">
 
-<div id="noposts">Nothing was Found</div>
+
 
 </div>
 </section>
 
-   <script>var exports = {};</script>
+   <script>var exports = []; </script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"> </script>
 
 <script>
   // Your web app's Firebase configuration
@@ -60,11 +60,11 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  
+
 
 </script>
-<script src="/assets/scripts/newjs/dist/index.js"></script>
-
+<script src="/assets/scripts/newjs/dist/data.js"></script>
+<script src="/assets/scripts/newjs/dist/auth.js"></script>
 
 
 

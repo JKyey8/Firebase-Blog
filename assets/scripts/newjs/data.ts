@@ -1,9 +1,8 @@
-//getting data from firebase
 let firebase;
-
 const db = firebase.firestore();
-const ref = db.collection("posts")
 
+
+const auth = firebase.auth();
 
 const blogcontainer = document.getElementById("blogposts")
 
@@ -18,11 +17,6 @@ var posts
 querySnapshot.forEach((doc) => {
 posts = doc.data()
 let ids = doc.id
-
-console.log(doc.id)
-
-
-
 displayBlogs(posts, ids)
 likePost(ids, posts)
 deletePost(ids, posts)
@@ -67,6 +61,9 @@ var blogtext = document.createElement("p");
 var bloglikes = document.createElement("h4");
 var addlike = document.createElement("button");
 var deletebtn = document.createElement("button")
+var comment = document.createElement("textarea")
+comment.className = "sendcomment";
+comment.id = "comments-" + ids;
 addlike.className = "likepost";
 deletebtn.className = "deletepost";
 deletebtn.id = "deletebtn-" + ids;
@@ -86,6 +83,7 @@ div.appendChild(bloglikes)
 div.appendChild(deletebtn)
 div.appendChild(addlike)
 div.appendChild(blogtext)
+div.appendChild(comment)
 blogcontainer.appendChild(div)
 
 if(blogtitle.innerHTML == "undefined"){
@@ -124,6 +122,10 @@ document.getElementById("blog-" + ids).style.display = "block"
 
 })
 }
+
+
+
+
 
 
 

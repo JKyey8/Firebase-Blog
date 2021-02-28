@@ -26,37 +26,63 @@ body {
 
 navbar {
   position: relative;
-  top: 0px;
+  top: 0;
   right: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100vw;
   border: 10px solid #E98A15;
-  border-radius: 20px;
+  border-radius: 1.25rem;
 }
 navbar h1 {
   color: #0C0910;
-}
-navbar a {
-  color: #EEEEEE;
-  text-decoration: none;
-  background: #0094C6;
-  text-align: center;
-  border: 8px solid #0094C6;
-  border-radius: 10px;
-  font-size: 0.9rem;
 }
 navbar form {
   width: 30vw;
 }
 navbar input, navbar textarea {
   display: block;
-  margin: 16px 0;
-  padding: 6px 10px;
+  margin: 1rem 0;
+  padding: 0.5rem 0.625rem;
   width: 100%;
-  border: 1px solid #0094C6;
+  border: 0.15rem solid #0094C6;
   font-family: "Roboto";
+}
+
+#right-nav {
+  display: flex;
+  justify-content: space-around;
+  width: 10vw;
+}
+#right-nav a {
+  color: #EEEEEE;
+  text-decoration: none;
+  background: #0094C6;
+  text-align: center;
+  border: 0.5rem solid #0094C6;
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+  display: none;
+}
+#right-nav button {
+  color: #0C0910;
+  color: #EEEEEE;
+  text-decoration: none;
+  background: #0094C6;
+  text-align: center;
+  border: 0.5rem solid #0094C6;
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+}
+#right-nav button:first-of-type {
+  color: #EEEEEE;
+  text-decoration: none;
+  background: #E98A15;
+  text-align: center;
+  border: 0.5rem solid #E98A15;
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
 }
 
 #blogs-container {
@@ -68,29 +94,49 @@ navbar input, navbar textarea {
 .blogs {
   display: block;
   position: relative;
-  border: 5px solid #70199F;
-  margin: 20px 4px;
-  max-width: 55vw;
-  border-radius: 20px;
+  border: 0.375rem solid #70199F;
+  margin: 1.25rem 0.25rem;
+  width: 50vw;
+  border-radius: 1.25rem;
   height: auto;
   min-height: 15vh;
 }
-
-.likepost {
-  border: 2px solid #0094C6;
-  position: absolute;
-  top: 30px;
-  right: 20px;
+.blogs .textheader {
+  padding: 0.625rem;
 }
-
-.deletepost {
-  border: 2px solid #E98A15;
-  position: absolute;
-  top: 75px;
-  right: 20px;
+.blogs .textlikes {
+  padding: 0.625rem;
 }
-
-.textzone {
+.blogs .likepost {
+  border: 0.25rem solid #0094C6;
+  position: absolute;
+  top: 3vh;
+  right: 1.5vw;
+}
+.blogs .deletepost {
+  border: 0.25rem solid #E98A15;
+  position: absolute;
+  top: 8vh;
+  right: 1.5vw;
+}
+.blogs .sendcomment {
+  margin: 1rem;
+  width: 20vw;
+}
+.blogs .textzone {
   word-wrap: break-word;
-  padding: 10px 10px;
+  padding: 0.625rem;
+}
+
+form {
+  width: 30vw;
+}
+
+input, textarea {
+  display: block;
+  margin: 1rem 0;
+  padding: 0.5rem 0.625rem;
+  width: 100%;
+  border: 0.15rem solid #0094C6;
+  font-family: "Roboto";
 }

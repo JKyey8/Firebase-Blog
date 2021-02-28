@@ -1,11 +1,10 @@
-//same tmestamp as firestore server
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
 
 document.getElementById("newitem").addEventListener("submit", newBlog)
 
 
-
+//make new blog
 async function newBlog(e){
 e.preventDefault();
 //function to add new data to teh database

@@ -34,9 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-//same tmestamp as firestore server
 var timestamp = firebase.firestore.FieldValue.serverTimestamp;
 document.getElementById("newitem").addEventListener("submit", newBlog);
+//make new blog
 function newBlog(e) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {

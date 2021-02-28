@@ -82,8 +82,8 @@ function displayBlogs(doc, ids) {
     var bloglikes = document.createElement("h4");
     var addlike = document.createElement("button");
     var deletebtn = document.createElement("button");
-    addlike.className = "addlikes";
-    deletebtn.className = "deletebtns";
+    addlike.className = "likepost";
+    deletebtn.className = "deletepost";
     deletebtn.id = "deletebtn-" + ids;
     addlike.id = "likebtn-" + ids;
     bloglikes.className = "textlikes";

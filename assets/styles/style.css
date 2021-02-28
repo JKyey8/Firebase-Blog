@@ -17,9 +17,8 @@ html {
 }
 
 body {
-  background: #EEEEEE;
+  background-color: #EEEEEE;
   font-family: 'Roboto';
-  color: #444;
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -48,12 +47,13 @@ navbar h1 {
 }
 
 navbar a {
-  color: white;
+  color: #EEEEEE;
   text-decoration: none;
   background: #0094C6;
   text-align: center;
   border: 8px solid #0094C6;
   border-radius: 10px;
+  font-size: 0.9rem;
 }
 
 navbar form {
@@ -65,12 +65,8 @@ navbar input, navbar textarea {
   margin: 16px 0;
   padding: 6px 10px;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid #0094C6;
   font-family: 'Roboto';
-}
-
-navbar textarea {
-  min-height: 200px;
 }
 
 #blogs-container {
@@ -93,15 +89,15 @@ navbar textarea {
   min-height: 15vh;
 }
 
-.addlikes {
-  border: 2px solid #36cca2;
+.likepost {
+  border: 2px solid #0094C6;
   position: absolute;
   top: 30px;
   right: 20px;
 }
 
-.deletebtns {
-  border: 2px solid red;
+.deletepost {
+  border: 2px solid #E98A15;
   position: absolute;
   top: 75px;
   right: 20px;
@@ -109,6 +105,6 @@ navbar textarea {
 
 .textzone {
   word-wrap: break-word;
-  padding: 0px 10px;
+  padding: 10px 10px;
 }
 /*# sourceMappingURL=style.css.map */

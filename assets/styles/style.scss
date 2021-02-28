@@ -1,5 +1,5 @@
 
-@use "./_misc" as m;
+@import "./_misc";
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
@@ -22,7 +22,7 @@ overflow-x:auto ;
 
 
 body {
-  background-color: m.$white;
+  background-color: $white;
   font-family: 'Roboto';
 
 width: 100vw;
@@ -39,20 +39,21 @@ right:0;
   justify-content: space-around;
 align-items: center;
 width: 100vw;
-border: 10px solid m.$yellow;
+border: 10px solid $yellow;
 border-radius: 20px;
 
 h1{
 
-color: m.$black;
+color: $black;
 }
 a {
-  color: m.$white;
+  color: $white;
   text-decoration: none;
-  background: m.$blue;
+  background: $blue;
 text-align: center;
- border: 8px solid m.$blue ;
+ border: 8px solid $blue ;
 border-radius: 10px;
+font-size: $smltxt2;
 
 }
 form {
@@ -63,7 +64,7 @@ input, textarea {
   margin: 16px 0;
   padding: 6px 10px;
   width: 100%;
-  border: 1px solid m.$blue;
+  border: 1px solid $blue;
   font-family: 'Roboto';
 }
 
@@ -78,10 +79,13 @@ justify-content: space-around;
 
 }
 
+
+
+
 .blogs{
 display: block;
 position: relative;
-border: 5px solid m.$purple;
+border: 5px solid $purple;
 margin: 20px 4px;
 max-width: 55vw;
 border-radius: 20px;
@@ -91,8 +95,8 @@ min-height: 15vh;
 
 }
 
-.addlikes{
-border: 2px solid m.$blue;
+.likepost{
+border: 2px solid $blue;
 position: absolute;
 top:30px;
 right: 20px;
@@ -103,8 +107,8 @@ right: 20px;
 
 
 
-.deletebtns{
-border: 2px solid m.$yellow;
+.deletepost{
+border: 2px solid $yellow;
 position: absolute;
 top: 75px;
 right: 20px;
@@ -113,5 +117,5 @@ right: 20px;
 
 .textzone{
 word-wrap: break-word;
-padding: 0px 10px;
+padding: 10px 10px;
 }

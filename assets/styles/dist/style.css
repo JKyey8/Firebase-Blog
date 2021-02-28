@@ -45,6 +45,7 @@ navbar a {
   text-align: center;
   border: 8px solid #0094C6;
   border-radius: 10px;
+  font-size: 0.9rem;
 }
 navbar form {
   width: 30vw;
@@ -75,14 +76,14 @@ navbar input, navbar textarea {
   min-height: 15vh;
 }
 
-.addlikes {
+.likepost {
   border: 2px solid #0094C6;
   position: absolute;
   top: 30px;
   right: 20px;
 }
 
-.deletebtns {
+.deletepost {
   border: 2px solid #E98A15;
   position: absolute;
   top: 75px;
@@ -91,5 +92,5 @@ navbar input, navbar textarea {
 
 .textzone {
   word-wrap: break-word;
-  padding: 0px 10px;
+  padding: 10px 10px;
 }

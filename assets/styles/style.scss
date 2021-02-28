@@ -104,8 +104,47 @@ font-size: $smltxt2;
 
 }
 
+}
+
+.user-portal{
+position: absolute;
+top: 0;
+left: 0;
+display: none;
+width: 100vw;
+height: 100vh;
+
+z-index: 5;
+
+&::before{
+ 
+      content: "";
+    background-color: $black;
+      width: 100vw;
+height: 100vh;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 0.75;
+z-index: 0;
 
 
+}
+
+
+form{
+position: relative;
+}
+
+
+button{
+position: relative;
+
+
+
+}
 
 
 }
@@ -117,7 +156,6 @@ justify-content: space-around;
 
 
 }
-
 
 .blogs{
 display: block;
@@ -174,14 +212,9 @@ padding: .625rem;
 
 
 
-
-
-}
-
-
 form {
   width: 30vw;
-}
+
 input, textarea {
   display: block;
   margin: 1rem 0;
@@ -189,4 +222,9 @@ input, textarea {
   width: 100%;
   border: .15rem solid $blue;
   font-family: 'Roboto';
+}
+
+}
+
+
 }

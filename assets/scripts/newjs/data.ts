@@ -1,5 +1,5 @@
 let firebase;
-const db = firebase.firestore();
+export const db = firebase.firestore();
 
 
 const auth = firebase.auth();
@@ -123,12 +123,51 @@ document.getElementById("blog-" + ids).style.display = "block"
 })
 }
 
+// login and sign up boxes
+document.getElementById("loginbtn").addEventListener("click", () => {document.getElementById("login-page").style.display = "block";} )
+
+document.getElementById("close-login").addEventListener("click", () => {document.getElementById("login-page").style.display = "none";} )
+
+
+document.getElementById("signupbtn").addEventListener("click", () => {document.getElementById("signup-page").style.display = "block";} )
+
+document.getElementById("close-signup").addEventListener("click", () => {document.getElementById("signup-page").style.display = "none";} )
+
+document.getElementById("signup-form").addEventListener("submit", newUser )
+
+document.getElementById("login-form").addEventListener("submit", loginUser )
 
 
 
 
 
 
+async function newUser(e){
+e.preventDefault();
+//@ts-ignore
+let SUemail =  document.getElementById('email-signup').value;
+//@ts-ignore
+let SUpassword = document.getElementById("password-signup").value;
 
+auth.createUserWithEmailAndPassword(SUemail, SUpassword).then((userCredential) => {
 
+var user = userCredential.user
 
+})
+}
+
+async function loginUser(e){
+e.preventDefault();
+//@ts-ignore
+let LIemail =  document.getElementById('email-login').value;
+//@ts-ignore
+let LIpassword = document.getElementById("password-login").value;
+
+firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    // ...
+  })
+
+}

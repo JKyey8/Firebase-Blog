@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,12 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+exports.__esModule = true;
+exports.db = void 0;
 var firebase;
-var db = firebase.firestore();
+exports.db = firebase.firestore();
 var auth = firebase.auth();
 var blogcontainer = document.getElementById("blogposts");
 //real time data
-db.collection("posts")
+exports.db.collection("posts")
     .orderBy("id", "desc")
     .onSnapshot(function (querySnapshot) {
     blogcontainer.innerHTML = "";
@@ -59,13 +62,13 @@ function likePost(ids, doc) {
     document.getElementById("likebtn-" + ids).addEventListener("click", function () {
         if (!isLiked) {
             document.getElementById("likebtn-" + ids).style.display = "none";
-            db.collection("posts").doc(ids).update({
+            exports.db.collection("posts").doc(ids).update({
                 likes: doc.likes + 1
             });
             isLiked = true;
         }
         else {
-            db.collection("posts").doc(ids).update({
+            exports.db.collection("posts").doc(ids).update({
                 likes: doc.likes - 1
             });
             isLiked = false;
@@ -113,7 +116,7 @@ function deletePost(ids, doc) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             document.getElementById("deletebtn-" + ids).addEventListener("click", function () {
-                db.collection("posts").doc(ids)["delete"]();
+                exports.db.collection("posts").doc(ids)["delete"]();
             });
             return [2 /*return*/];
         });
@@ -131,6 +134,44 @@ function searchBlog(doc, ids) {
                 }
                 else
                     (document.getElementById("blog-" + ids).style.display = "block");
+            });
+            return [2 /*return*/];
+        });
+    });
+}
+// login and sign up boxes
+document.getElementById("loginbtn").addEventListener("click", function () { document.getElementById("login-page").style.display = "block"; });
+document.getElementById("close-login").addEventListener("click", function () { document.getElementById("login-page").style.display = "none"; });
+document.getElementById("signupbtn").addEventListener("click", function () { document.getElementById("signup-page").style.display = "block"; });
+document.getElementById("close-signup").addEventListener("click", function () { document.getElementById("signup-page").style.display = "none"; });
+document.getElementById("signup-form").addEventListener("submit", newUser);
+document.getElementById("login-form").addEventListener("submit", loginUser);
+function newUser(e) {
+    return __awaiter(this, void 0, void 0, function () {
+        var SUemail, SUpassword;
+        return __generator(this, function (_a) {
+            e.preventDefault();
+            SUemail = document.getElementById('email-signup').value;
+            SUpassword = document.getElementById("password-signup").value;
+            auth.createUserWithEmailAndPassword(SUemail, SUpassword).then(function (userCredential) {
+                var user = userCredential.user;
+            });
+            return [2 /*return*/];
+        });
+    });
+}
+function loginUser(e) {
+    return __awaiter(this, void 0, void 0, function () {
+        var LIemail, LIpassword;
+        return __generator(this, function (_a) {
+            e.preventDefault();
+            LIemail = document.getElementById('email-login').value;
+            LIpassword = document.getElementById("password-login").value;
+            firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
+                .then(function (userCredential) {
+                // Signed in
+                var user = userCredential.user;
+                // ...
             });
             return [2 /*return*/];
         });

@@ -85,6 +85,35 @@ navbar input, navbar textarea {
   font-size: 0.9rem;
 }
 
+.user-portal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+}
+.user-portal::before {
+  content: "";
+  background-color: #0C0910;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+  z-index: 0;
+}
+.user-portal form {
+  position: relative;
+}
+.user-portal button {
+  position: relative;
+}
+
 #blogs-container {
   width: 75vw;
   display: flex;
@@ -127,12 +156,10 @@ navbar input, navbar textarea {
   word-wrap: break-word;
   padding: 0.625rem;
 }
-
-form {
+.blogs form {
   width: 30vw;
 }
-
-input, textarea {
+.blogs form input, .blogs form textarea {
   display: block;
   margin: 1rem 0;
   padding: 0.5rem 0.625rem;

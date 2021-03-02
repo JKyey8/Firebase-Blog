@@ -1,4 +1,5 @@
 import {db} from "./data";
+import {user} from "./auth";
 let firebase;
 const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
@@ -27,3 +28,4 @@ window.location.replace("/index.html")
 
 
 }
+console.log(user)

@@ -53,9 +53,14 @@ navbar input, navbar textarea {
 #right-nav {
   display: flex;
   justify-content: space-around;
-  width: 10vw;
+  width: 15vw;
 }
-#right-nav a {
+#right-nav #user-signedin-btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+#right-nav #user-signedin-btns a {
   color: #EEEEEE;
   text-decoration: none;
   background: #0094C6;
@@ -63,9 +68,9 @@ navbar input, navbar textarea {
   border: 0.5rem solid #0094C6;
   border-radius: 0.625rem;
   font-size: 0.9rem;
-  display: none;
+  display: inline;
 }
-#right-nav button {
+#right-nav #user-signedin-btns button {
   color: #0C0910;
   color: #EEEEEE;
   text-decoration: none;
@@ -74,8 +79,25 @@ navbar input, navbar textarea {
   border: 0.5rem solid #0094C6;
   border-radius: 0.625rem;
   font-size: 0.9rem;
+  display: inline;
 }
-#right-nav button:first-of-type {
+#right-nav #user-btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+#right-nav #user-btns button {
+  color: #0C0910;
+  color: #EEEEEE;
+  text-decoration: none;
+  background: #0094C6;
+  text-align: center;
+  border: 0.5rem solid #0094C6;
+  border-radius: 0.625rem;
+  font-size: 0.9rem;
+  display: inline;
+}
+#right-nav #user-btns button:first-of-type {
   color: #EEEEEE;
   text-decoration: none;
   background: #E98A15;

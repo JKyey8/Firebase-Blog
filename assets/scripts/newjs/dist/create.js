@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var data_1 = require("./data");
+var auth_1 = require("./auth");
 var firebase;
 var timestamp = firebase.firestore.FieldValue.serverTimestamp;
 document.getElementById("newitem").addEventListener("submit", newBlog);
@@ -65,3 +66,4 @@ function newBlog(e) {
         });
     });
 }
+console.log(auth_1.user);

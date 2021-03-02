@@ -69,9 +69,7 @@ navbar input, navbar textarea {
 }
 
 #right-nav #user-signedin-btns {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   width: 100%;
   -ms-flex-pack: distribute;
       justify-content: space-around;
@@ -100,7 +98,7 @@ navbar input, navbar textarea {
   display: inline;
 }
 
-#right-nav #user-btns {
+#right-nav #user-signedout-btns {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -109,7 +107,7 @@ navbar input, navbar textarea {
       justify-content: space-around;
 }
 
-#right-nav #user-btns button {
+#right-nav #user-signedout-btns button {
   color: #0C0910;
   color: #EEEEEE;
   text-decoration: none;
@@ -121,7 +119,7 @@ navbar input, navbar textarea {
   display: inline;
 }
 
-#right-nav #user-btns button:first-of-type {
+#right-nav #user-signedout-btns button:first-of-type {
   color: #EEEEEE;
   text-decoration: none;
   background: #E98A15;

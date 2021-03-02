@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,13 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-exports.db = void 0;
-var firebase;
-exports.db = firebase.firestore();
 var blogcontainer = document.getElementById("blogposts");
 //real time data
-exports.db.collection("posts")
+db.collection("posts")
     .orderBy("id", "desc")
     .onSnapshot(function (querySnapshot) {
     blogcontainer.innerHTML = "";
@@ -61,13 +56,13 @@ function likePost(ids, doc) {
     document.getElementById("likebtn-" + ids).addEventListener("click", function () {
         if (!isLiked) {
             document.getElementById("likebtn-" + ids).style.display = "none";
-            exports.db.collection("posts").doc(ids).update({
+            db.collection("posts").doc(ids).update({
                 likes: doc.likes + 1
             });
             isLiked = true;
         }
         else {
-            exports.db.collection("posts").doc(ids).update({
+            db.collection("posts").doc(ids).update({
                 likes: doc.likes - 1
             });
             isLiked = false;
@@ -115,7 +110,11 @@ function deletePost(ids, doc) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             document.getElementById("deletebtn-" + ids).addEventListener("click", function () {
-                exports.db.collection("posts").doc(ids)["delete"]();
+                auth.onAuthStateChanged(function (user) {
+                    if (user.uid == ids) {
+                        db.collection("posts").doc(ids)["delete"]();
+                    }
+                });
             });
             return [2 /*return*/];
         });

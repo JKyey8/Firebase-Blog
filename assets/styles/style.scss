@@ -71,7 +71,7 @@ width: 15vw;
 
 #user-signedin-btns{
 
-display: flex;
+display: none;
 width: 100%;
 justify-content: space-around;
 
@@ -108,7 +108,7 @@ display: inline;
 }
 
 
-#user-btns{
+#user-signedout-btns{
 
 
 display: flex;

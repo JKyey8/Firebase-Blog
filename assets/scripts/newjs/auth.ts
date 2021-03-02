@@ -1,5 +1,5 @@
 let firebase;
-const auth = firebase.auth();
+
 
 
 // login and sign up boxes
@@ -13,12 +13,7 @@ document.getElementById("signupbtn").addEventListener("click", () => {document.g
 document.getElementById("close-signup").addEventListener("click", () => {document.getElementById("signup-page").style.display = "none";} )
 
 
-
-
-
-
-
-
+//sign up user
 document.getElementById("signup-form").addEventListener("submit", async (e) => {
 
 e.preventDefault();
@@ -29,26 +24,18 @@ let SUpassword = document.getElementById("password-signup").value;
 
 await auth.createUserWithEmailAndPassword(SUemail, SUpassword).then((userCredential) => {
 
-var user = userCredential.user
+ var user = userCredential.user;
+
+
 
 })
 document.getElementById("signup-page").style.display = "none";
-
-
-
-
-
 
 }) 
 
 
 
-
-
-
-
-
-
+//sign in user
 document.getElementById("login-form").addEventListener("submit", async (e) => {
 
 e.preventDefault();
@@ -62,30 +49,60 @@ await firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
     // Signed in
     var user = userCredential.user;
 
-    // ...
-console.log(user)
+
+
+
+
   })
 document.getElementById("login-page").style.display = "none";
-})
+});
 
 
 
 
-firebase.auth().onAuthStateChanged(function(user) {
+//check if user is logged in
+firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
-console.log(user)
-document.getElementById("user-btns").style.display = "none"
+//@ts-ignore
+
+
+
+document.getElementById("user-signedout-btns").style.display = "none"
 
 document.getElementById("user-signedin-btns").style.display = "flex"
 
 
-   
-
   } else {
-  document.getElementById("user-btns").style.display = "flex"
+  document.getElementById("user-signedout-btns").style.display = "flex"
 
 document.getElementById("user-signedin-btns").style.display = "none"
   }
 
 } )
+
+
+
+//log out
+let logoutbtn = document.getElementById("logoutbtn")
+logoutbtn.addEventListener("click", (e) => {
+e.preventDefault();
+auth.signOut().then(() => {
+  document.getElementById("user-signedout-btns").style.display = "flex"
+
+document.getElementById("user-signedin-btns").style.display = "none"
+
+})
+
+
+}) 
+
+
+export let hi = function getuserId(user){
+console.log(user.uid);
+}
+
+
+
+
+
 

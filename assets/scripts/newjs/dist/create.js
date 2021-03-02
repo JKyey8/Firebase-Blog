@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,35 +34,57 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var data_1 = require("./data");
-var auth_1 = require("./auth");
 var firebase;
+var firebaseConfig = {
+    apiKey: "AIzaSyAqq_sln1epLeTCTrJoHvHtJUttZWIIAIE",
+    authDomain: "blog-with-fetch-api-d1fc2.firebaseapp.com",
+    projectId: "blog-with-fetch-api-d1fc2",
+    storageBucket: "blog-with-fetch-api-d1fc2.appspot.com",
+    messagingSenderId: "578971062320",
+    appId: "1:578971062320:web:aefa7a8ecac2d7000a1df5",
+    measurementId: "G-DP6MSH6JDF"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+var auth = firebase.auth();
 var timestamp = firebase.firestore.FieldValue.serverTimestamp;
 document.getElementById("newitem").addEventListener("submit", newBlog);
 //make new blog
 function newBlog(e) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    e.preventDefault();
-                    //function to add new data to teh database
-                    return [4 /*yield*/, data_1.db.collection("posts").add({
-                            //@ts-ignore
-                            title: document.getElementById("title").value,
-                            //@ts-ignore
-                            body: document.getElementById("postbody").value,
-                            likes: 0,
-                            id: timestamp()
-                        })];
-                case 1:
-                    //function to add new data to teh database
-                    _a.sent();
-                    window.location.replace("/index.html");
-                    return [2 /*return*/];
-            }
+            e.preventDefault();
+            auth.onAuthStateChanged(function (user) {
+                return __awaiter(this, void 0, void 0, function () {
+                    var id, userID;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                console.log(user.uid);
+                                id = user.uid;
+                                if (!user) return [3 /*break*/, 2];
+                                userID = user.uid;
+                                return [4 /*yield*/, db.collection("posts").add({
+                                        //@ts-ignore
+                                        title: document.getElementById("title").value,
+                                        //@ts-ignore
+                                        body: document.getElementById("postbody").value,
+                                        likes: 0,
+                                        date: timestamp(),
+                                        id: id
+                                    })];
+                            case 1:
+                                _a.sent();
+                                _a.label = 2;
+                            case 2:
+                                window.location.replace("/");
+                                return [2 /*return*/];
+                        }
+                    });
+                });
+            });
+            return [2 /*return*/];
         });
     });
 }
-console.log(auth_1.user);

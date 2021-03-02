@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,15 +35,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
+exports.__esModule = true;
+exports.hi = void 0;
 var firebase;
-var auth = firebase.auth();
 // login and sign up boxes
 document.getElementById("loginbtn").addEventListener("click", function () { document.getElementById("login-page").style.display = "block"; });
 document.getElementById("close-login").addEventListener("click", function () { document.getElementById("login-page").style.display = "none"; });
 document.getElementById("signupbtn").addEventListener("click", function () { document.getElementById("signup-page").style.display = "block"; });
 document.getElementById("close-signup").addEventListener("click", function () { document.getElementById("signup-page").style.display = "none"; });
-document.getElementById("signup-form").addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
+//sign up user
+document.getElementById("signup-form").addEventListener("submit", function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var SUemail, SUpassword;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -60,7 +62,8 @@ document.getElementById("signup-form").addEventListener("submit", function (e) {
         }
     });
 }); });
-document.getElementById("login-form").addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
+//sign in user
+document.getElementById("login-form").addEventListener("submit", function (e) { return __awaiter(void 0, void 0, void 0, function () {
     var LIemail, LIpassword;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -72,8 +75,6 @@ document.getElementById("login-form").addEventListener("submit", function (e) { 
                         .then(function (userCredential) {
                         // Signed in
                         var user = userCredential.user;
-                        // ...
-                        console.log(user);
                     })];
             case 1:
                 _a.sent();
@@ -82,14 +83,27 @@ document.getElementById("login-form").addEventListener("submit", function (e) { 
         }
     });
 }); });
+//check if user is logged in
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        console.log(user);
-        document.getElementById("user-btns").style.display = "none";
+        //@ts-ignore
+        document.getElementById("user-signedout-btns").style.display = "none";
         document.getElementById("user-signedin-btns").style.display = "flex";
     }
     else {
-        document.getElementById("user-btns").style.display = "flex";
+        document.getElementById("user-signedout-btns").style.display = "flex";
         document.getElementById("user-signedin-btns").style.display = "none";
     }
 });
+//log out
+var logoutbtn = document.getElementById("logoutbtn");
+logoutbtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    auth.signOut().then(function () {
+        document.getElementById("user-signedout-btns").style.display = "flex";
+        document.getElementById("user-signedin-btns").style.display = "none";
+    });
+});
+exports.hi = function getuserId(user) {
+    console.log(user.uid);
+};

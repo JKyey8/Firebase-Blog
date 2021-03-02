@@ -1,5 +1,4 @@
-let firebase;
-export const db = firebase.firestore();
+
 
 
 
@@ -17,6 +16,7 @@ var posts
 querySnapshot.forEach((doc) => {
 posts = doc.data()
 let ids = doc.id
+
 displayBlogs(posts, ids)
 likePost(ids, posts)
 deletePost(ids, posts)
@@ -97,10 +97,19 @@ div.remove();
 //delete posts
 async function deletePost(ids, doc){
 document.getElementById("deletebtn-" + ids).addEventListener("click", () => {
+
+auth.onAuthStateChanged((user) => {
+if(user.uid == ids){
 db.collection("posts").doc(ids).delete()
 }
-)
+
+
+})
+})
 }
+
+
+
 
 
 

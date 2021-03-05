@@ -30,7 +30,7 @@ auth.onAuthStateChanged(
 
 async function (user) {
 
-console.log(user.uid)
+
 var id = user.uid
 if(user){
 let userID = user.uid

@@ -1,4 +1,4 @@
-let firebase;
+
 
 
 
@@ -22,10 +22,21 @@ let SUemail =  document.getElementById('email-signup').value;
 //@ts-ignore
 let SUpassword = document.getElementById("password-signup").value;
 
-await auth.createUserWithEmailAndPassword(SUemail, SUpassword).then((userCredential) => {
+await auth.createUserWithEmailAndPassword(SUemail, SUpassword).then(async (userCredential) => {
 
  var user = userCredential.user;
+await db.collection("users").doc(user.uid).set({
+email:user.email,
+username:user.displayName,
+})
 
+
+await db.collection("users").doc(user.uid).collection("likedposts").add({
+
+
+
+
+})
 
 
 })
@@ -70,7 +81,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 document.getElementById("user-signedout-btns").style.display = "none"
 
 document.getElementById("user-signedin-btns").style.display = "flex"
-
+document.getElementById("user-profile").innerHTML = user.email
 
   } else {
   document.getElementById("user-signedout-btns").style.display = "flex"
@@ -97,9 +108,6 @@ document.getElementById("user-signedin-btns").style.display = "none"
 }) 
 
 
-export let hi = function getuserId(user){
-console.log(user.uid);
-}
 
 
 

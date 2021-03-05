@@ -1,12 +1,8 @@
 
-
-
-
-
 const blogcontainer = document.getElementById("blogposts")
 
 
-//real time data
+//real time data for posts
 db.collection("posts")
 .orderBy("id", "desc")
 .onSnapshot((querySnapshot) => {
@@ -22,36 +18,150 @@ likePost(ids, posts)
 deletePost(ids, posts)
 searchBlog(posts, ids)
 
+
+
+
+
+
+
+
+
 });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//realtime data for users
+
+
+
+
+
+
 
 
 // liking posts
 let isLiked = false;
-function likePost(ids, doc){
+function likePost(ids, posts){
 
-document.getElementById("likebtn-" + ids).addEventListener("click", () => {
+document.getElementById("likebtn-" + ids).addEventListener("click", async () => {
+console.log(posts.id)
+console.log(ids)
 
-if(!isLiked){
-document.getElementById("likebtn-" + ids).style.display = "none"
-db.collection("posts").doc(ids).update({
-likes:doc.likes + 1
+let hi1 = [];
+
+
+//check if user is logged in
+firebase.auth().onAuthStateChanged(function (userCredentials) {
+  if (userCredentials) {
+//@ts-ignore
+
+let user = userCredentials
+
+
+
+
+
+
+
+
+db.collection("users").doc(user.uid).collection("likedposts").get().then((snapshot) => {
+
+snapshot.forEach((doc) => {
+
+let likedpostsId = doc.id
+hi1.push(likedpostsId)
+
 });
-isLiked = true;
 
 
-} else {
-db.collection("posts").doc(ids).update({
-likes:doc.likes - 1
+
+
+
+
+
+
+hi({hi1, ids, posts, user})
 })
-isLiked = false
+
+  } 
+
+} )
+
+
+/*
+db.collection("users").doc(posts.id).collection("likedposts").onSnapshot(  (snapshot) =>{
+
+ snapshot.forEach((doc) => {
+
+let likedpostsId = doc.id
+hi1.push(likedpostsId)
+
+
+ })
+hi(hi1, ids, posts)
+
+ })
+*/
+
+
+})
+}
+
+
+async function hi(parameters) {
+console.log(parameters.hi1)
+let no = parameters.hi1.toString()
+console.log(no)
+console.log(parameters.ids)
+
+console.log(parameters.user.uid)
+
+
+if(no.includes(parameters.ids) == false){
+db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids).set({});
+
+db.collection("posts").doc(parameters.ids).update({
+likes:parameters.posts.likes + 1
+});
+
+
+console.log("not liked")
+} else if(no.includes(parameters.ids) == true) {
+
+db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids).delete();
+
+
+db.collection("posts").doc(parameters.ids).update({
+likes:parameters.posts.likes - 1
+});
+
+
+console.log("liked")
 
 }
 
 }
-)
-}
+
+
+
+
+
+
+
 
 //dispalay the blogs
 function displayBlogs(doc, ids) {
@@ -98,8 +208,11 @@ div.remove();
 async function deletePost(ids, doc){
 document.getElementById("deletebtn-" + ids).addEventListener("click", () => {
 
+
+
+
 auth.onAuthStateChanged((user) => {
-if(user.uid == ids){
+if(user.uid == doc.id){
 db.collection("posts").doc(ids).delete()
 }
 

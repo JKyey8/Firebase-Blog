@@ -70,6 +70,10 @@ navbar input, navbar textarea {
   font-size: 0.9rem;
   display: inline;
 }
+#right-nav #user-signedin-btns p {
+  font-size: 0.75rem;
+  display: inline;
+}
 #right-nav #user-signedin-btns button {
   color: #0C0910;
   color: #EEEEEE;
@@ -82,7 +86,7 @@ navbar input, navbar textarea {
   display: inline;
 }
 #right-nav #user-signedout-btns {
-  display: flex;
+  display: none;
   width: 100%;
   justify-content: space-around;
 }

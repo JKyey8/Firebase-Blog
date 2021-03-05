@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,26 +34,41 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-exports.hi = void 0;
-var firebase;
+var _this = this;
 // login and sign up boxes
 document.getElementById("loginbtn").addEventListener("click", function () { document.getElementById("login-page").style.display = "block"; });
 document.getElementById("close-login").addEventListener("click", function () { document.getElementById("login-page").style.display = "none"; });
 document.getElementById("signupbtn").addEventListener("click", function () { document.getElementById("signup-page").style.display = "block"; });
 document.getElementById("close-signup").addEventListener("click", function () { document.getElementById("signup-page").style.display = "none"; });
 //sign up user
-document.getElementById("signup-form").addEventListener("submit", function (e) { return __awaiter(void 0, void 0, void 0, function () {
+document.getElementById("signup-form").addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
     var SUemail, SUpassword;
+    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 e.preventDefault();
                 SUemail = document.getElementById('email-signup').value;
                 SUpassword = document.getElementById("password-signup").value;
-                return [4 /*yield*/, auth.createUserWithEmailAndPassword(SUemail, SUpassword).then(function (userCredential) {
-                        var user = userCredential.user;
-                    })];
+                return [4 /*yield*/, auth.createUserWithEmailAndPassword(SUemail, SUpassword).then(function (userCredential) { return __awaiter(_this, void 0, void 0, function () {
+                        var user;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    user = userCredential.user;
+                                    return [4 /*yield*/, db.collection("users").doc(user.uid).set({
+                                            email: user.email,
+                                            username: user.displayName
+                                        })];
+                                case 1:
+                                    _a.sent();
+                                    return [4 /*yield*/, db.collection("users").doc(user.uid).collection("likedposts").add({})];
+                                case 2:
+                                    _a.sent();
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); })];
             case 1:
                 _a.sent();
                 document.getElementById("signup-page").style.display = "none";
@@ -63,7 +77,7 @@ document.getElementById("signup-form").addEventListener("submit", function (e) {
     });
 }); });
 //sign in user
-document.getElementById("login-form").addEventListener("submit", function (e) { return __awaiter(void 0, void 0, void 0, function () {
+document.getElementById("login-form").addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
     var LIemail, LIpassword;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -89,6 +103,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         //@ts-ignore
         document.getElementById("user-signedout-btns").style.display = "none";
         document.getElementById("user-signedin-btns").style.display = "flex";
+        document.getElementById("user-profile").innerHTML = user.email;
     }
     else {
         document.getElementById("user-signedout-btns").style.display = "flex";
@@ -104,6 +119,3 @@ logoutbtn.addEventListener("click", function (e) {
         document.getElementById("user-signedin-btns").style.display = "none";
     });
 });
-exports.hi = function getuserId(user) {
-    console.log(user.uid);
-};

@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var blogcontainer = document.getElementById("blogposts");
-//real time data
+//real time data for posts
 db.collection("posts")
     .orderBy("id", "desc")
     .onSnapshot(function (querySnapshot) {
@@ -50,23 +50,60 @@ db.collection("posts")
         searchBlog(posts, ids);
     });
 });
+//realtime data for users
 // liking posts
 var isLiked = false;
-function likePost(ids, doc) {
-    document.getElementById("likebtn-" + ids).addEventListener("click", function () {
-        if (!isLiked) {
-            document.getElementById("likebtn-" + ids).style.display = "none";
-            db.collection("posts").doc(ids).update({
-                likes: doc.likes + 1
+function likePost(ids, posts) {
+    var _this = this;
+    document.getElementById("likebtn-" + ids).addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
+        var hi1;
+        return __generator(this, function (_a) {
+            console.log(posts.id);
+            console.log(ids);
+            hi1 = [];
+            //check if user is logged in
+            firebase.auth().onAuthStateChanged(function (userCredentials) {
+                if (userCredentials) {
+                    //@ts-ignore
+                    var user_1 = userCredentials;
+                    db.collection("users").doc(user_1.uid).collection("likedposts").get().then(function (snapshot) {
+                        snapshot.forEach(function (doc) {
+                            var likedpostsId = doc.id;
+                            hi1.push(likedpostsId);
+                        });
+                        hi({ hi1: hi1, ids: ids, posts: posts, user: user_1 });
+                    });
+                }
             });
-            isLiked = true;
-        }
-        else {
-            db.collection("posts").doc(ids).update({
-                likes: doc.likes - 1
-            });
-            isLiked = false;
-        }
+            return [2 /*return*/];
+        });
+    }); });
+}
+function hi(parameters) {
+    return __awaiter(this, void 0, void 0, function () {
+        var no;
+        return __generator(this, function (_a) {
+            console.log(parameters.hi1);
+            no = parameters.hi1.toString();
+            console.log(no);
+            console.log(parameters.ids);
+            console.log(parameters.user.uid);
+            if (no.includes(parameters.ids) == false) {
+                db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids).set({});
+                db.collection("posts").doc(parameters.ids).update({
+                    likes: parameters.posts.likes + 1
+                });
+                console.log("not liked");
+            }
+            else if (no.includes(parameters.ids) == true) {
+                db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids)["delete"]();
+                db.collection("posts").doc(parameters.ids).update({
+                    likes: parameters.posts.likes - 1
+                });
+                console.log("liked");
+            }
+            return [2 /*return*/];
+        });
     });
 }
 //dispalay the blogs
@@ -111,7 +148,7 @@ function deletePost(ids, doc) {
         return __generator(this, function (_a) {
             document.getElementById("deletebtn-" + ids).addEventListener("click", function () {
                 auth.onAuthStateChanged(function (user) {
-                    if (user.uid == ids) {
+                    if (user.uid == doc.id) {
                         db.collection("posts").doc(ids)["delete"]();
                     }
                 });

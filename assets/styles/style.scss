@@ -87,6 +87,11 @@ display: inline;
 
 
 }
+p{
+font-size: $smltxt1;
+display: inline;
+
+}
 
 button{
   color: $black;
@@ -111,7 +116,7 @@ display: inline;
 #user-signedout-btns{
 
 
-display: flex;
+display: none;
 width: 100%;
 justify-content: space-around;
 

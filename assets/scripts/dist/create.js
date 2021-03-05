@@ -61,7 +61,6 @@ function newBlog(e) {
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                console.log(user.uid);
                                 id = user.uid;
                                 if (!user) return [3 /*break*/, 2];
                                 userID = user.uid;

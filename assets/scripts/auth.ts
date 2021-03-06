@@ -102,6 +102,7 @@ auth.signOut().then(() => {
 
 document.getElementById("user-signedin-btns").style.display = "none"
 
+window.location.replace("/")
 })
 
 
@@ -112,5 +113,23 @@ document.getElementById("user-signedin-btns").style.display = "none"
 
 
 
+//log user out if the close the page
 
-
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(() => {
+//@ts-ignore
+let LIemail =  document.getElementById('email-login').value;
+//@ts-ignore
+let LIpassword = document.getElementById("password-login").value;
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword);
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });

@@ -65,7 +65,7 @@ navbar input, navbar textarea {
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  width: 15vw;
+  width: 18vw;
 }
 
 #right-nav #user-signedin-btns {

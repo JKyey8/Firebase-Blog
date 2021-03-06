@@ -41,18 +41,6 @@ searchBlog(posts, ids)
 
 
 
-
-
-
-//realtime data for users
-
-
-
-
-
-
-
-
 // liking posts
 let isLiked = false;
 function likePost(ids, posts){
@@ -86,9 +74,6 @@ let likedpostsId = doc.id
 hi1.push(likedpostsId)
 
 });
-
-
-
 
 
 
@@ -154,6 +139,11 @@ console.log("liked")
 
 }
 
+
+
+
+
+
 }
 
 
@@ -195,6 +185,11 @@ div.appendChild(addlike)
 div.appendChild(blogtext)
 div.appendChild(comment)
 blogcontainer.appendChild(div)
+
+if(doc.likes <= 0){
+doc.likes = 0
+
+}
 
 if(blogtitle.innerHTML == "undefined"){
 

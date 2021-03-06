@@ -50,7 +50,6 @@ db.collection("posts")
         searchBlog(posts, ids);
     });
 });
-//realtime data for users
 // liking posts
 var isLiked = false;
 function likePost(ids, posts) {
@@ -138,6 +137,9 @@ function displayBlogs(doc, ids) {
     div.appendChild(blogtext);
     div.appendChild(comment);
     blogcontainer.appendChild(div);
+    if (doc.likes <= 0) {
+        doc.likes = 0;
+    }
     if (blogtitle.innerHTML == "undefined") {
         div.remove();
     }

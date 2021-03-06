@@ -57,11 +57,10 @@ function newBlog(e) {
             e.preventDefault();
             auth.onAuthStateChanged(function (user) {
                 return __awaiter(this, void 0, void 0, function () {
-                    var id, userID;
+                    var userID;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                id = user.uid;
                                 if (!user) return [3 /*break*/, 2];
                                 userID = user.uid;
                                 return [4 /*yield*/, db.collection("posts").add({
@@ -71,7 +70,7 @@ function newBlog(e) {
                                         body: document.getElementById("postbody").value,
                                         likes: 0,
                                         date: timestamp(),
-                                        id: id
+                                        id: userID
                                     })];
                             case 1:
                                 _a.sent();

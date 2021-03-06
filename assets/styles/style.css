@@ -38,6 +38,7 @@ navbar {
       -ms-flex-align: center;
           align-items: center;
   width: 100vw;
+  height: 10vh;
   border: 10px solid #E98A15;
   border-radius: 1.25rem;
 }
@@ -57,6 +58,61 @@ navbar input, navbar textarea {
   width: 100%;
   border: 0.15rem solid #0094C6;
   font-family: 'Roboto';
+}
+
+#preloader {
+  width: 100vw;
+  height: 90vh;
+  position: absolute;
+  top: 10vh;
+  z-index: 5;
+  background-color: #EEEEEE;
+}
+
+#preloader #loader {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#preloader #loader #loader-animation {
+  border-radius: 100vw;
+  border: 1rem solid #47434C;
+  width: 15vw;
+  height: 15vw;
+  border-top: 1rem solid #0094C6;
+  -webkit-animation: spin 2s ease infinite;
+          animation: spin 2s ease infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 #right-nav {

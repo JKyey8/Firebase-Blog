@@ -31,7 +31,7 @@ auth.onAuthStateChanged(
 async function (user) {
 
 
-var id = user.uid
+
 if(user){
 let userID = user.uid
 await db.collection("posts").add({
@@ -42,7 +42,7 @@ title:document.getElementById("title").value,
 body:document.getElementById("postbody").value,
 likes:0,
 date: timestamp(),
-id: id
+id: userID
 })
 
 

@@ -49,7 +49,23 @@ db.collection("posts")
         deletePost(ids, posts);
         searchBlog(posts, ids);
     });
+    document.getElementById("preloader").style.display = "none";
 });
+/*
+//getting data(need refesh for new data)
+db.collection("posts")
+.orderBy("id", "desc")
+.get()
+.then((snapshot) => {
+blogcontainer.innerHTML = "";
+let posts
+snapshot.forEach((doc) => {
+posts = doc.data()
+let ids = doc.id
+})
+document.getElementById("preloader").style.display = "none"
+})
+*/
 // liking posts
 var isLiked = false;
 function likePost(ids, posts) {

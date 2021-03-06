@@ -32,6 +32,7 @@ navbar {
   justify-content: space-around;
   align-items: center;
   width: 100vw;
+  height: 10vh;
   border: 10px solid #E98A15;
   border-radius: 1.25rem;
 }
@@ -50,6 +51,38 @@ navbar input, navbar textarea {
   font-family: "Roboto";
 }
 
+#preloader {
+  width: 100vw;
+  height: 90vh;
+  position: absolute;
+  top: 10vh;
+  z-index: 5;
+  background-color: #EEEEEE;
+}
+#preloader #loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+#preloader #loader #loader-animation {
+  border-radius: 100vw;
+  border: 1rem solid #47434C;
+  width: 15vw;
+  height: 15vw;
+  border-top: 1rem solid #0094C6;
+  animation: spin 2s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 #right-nav {
   display: flex;
   justify-content: space-around;

@@ -7,33 +7,35 @@ db.collection("posts")
 .orderBy("id", "desc")
 .onSnapshot((querySnapshot) => {
 blogcontainer.innerHTML = "";
-var posts
-
+let posts
 querySnapshot.forEach((doc) => {
 posts = doc.data()
 let ids = doc.id
-
 displayBlogs(posts, ids)
 likePost(ids, posts)
 deletePost(ids, posts)
 searchBlog(posts, ids)
-
-
-
-
-
-
-
-
-
 });
+document.getElementById("preloader").style.display = "none"
 
 });
 
 
-
-
-
+/*
+//getting data(need refesh for new data)
+db.collection("posts")
+.orderBy("id", "desc")
+.get()
+.then((snapshot) => {
+blogcontainer.innerHTML = "";
+let posts
+snapshot.forEach((doc) => {
+posts = doc.data()
+let ids = doc.id
+})
+document.getElementById("preloader").style.display = "none"
+})
+*/
 
 
 

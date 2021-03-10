@@ -39,15 +39,18 @@ var blogcontainer = document.getElementById("blogposts");
 db.collection("posts")
     .orderBy("id", "desc")
     .onSnapshot(function (querySnapshot) {
+    document.getElementById("preloader").style.display = "block";
     blogcontainer.innerHTML = "";
     var posts;
+    var ids;
+    var allpostids = [];
     querySnapshot.forEach(function (doc) {
         posts = doc.data();
-        var ids = doc.id;
+        ids = doc.id;
         displayBlogs(posts, ids);
-        likePost(ids, posts);
-        deletePost(ids, posts);
+        PostFunctions(ids, posts);
         searchBlog(posts, ids);
+        allpostids.push(ids);
     });
     document.getElementById("preloader").style.display = "none";
 });
@@ -66,58 +69,49 @@ let ids = doc.id
 document.getElementById("preloader").style.display = "none"
 })
 */
-// liking posts
-var isLiked = false;
-function likePost(ids, posts) {
+function PostFunctions(ids, posts) {
+    // liking posts
     var _this = this;
     document.getElementById("likebtn-" + ids).addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
-        var hi1;
+        var user, userlikedposts;
         return __generator(this, function (_a) {
-            console.log(posts.id);
-            console.log(ids);
-            hi1 = [];
+            userlikedposts = [];
             //check if user is logged in
-            firebase.auth().onAuthStateChanged(function (userCredentials) {
+            auth.onAuthStateChanged(function (userCredentials) {
                 if (userCredentials) {
-                    //@ts-ignore
-                    var user_1 = userCredentials;
-                    db.collection("users").doc(user_1.uid).collection("likedposts").get().then(function (snapshot) {
+                    user = userCredentials;
+                    db.collection("users").doc(user.uid).collection("likedposts").get().then(function (snapshot) {
                         snapshot.forEach(function (doc) {
                             var likedpostsId = doc.id;
-                            hi1.push(likedpostsId);
+                            userlikedposts.push(likedpostsId);
                         });
-                        hi({ hi1: hi1, ids: ids, posts: posts, user: user_1 });
+                        var likedpostsId = userlikedposts.toString();
+                        //liking posts
+                        if (likedpostsId.includes(ids) == false) {
+                            db.collection("users").doc(user.uid).collection("likedposts").doc(ids).set({});
+                            db.collection("posts").doc(ids).update({
+                                likes: posts.likes + 1
+                            });
+                            document.getElementById;
+                        }
+                        else if (likedpostsId.includes(ids) == true) {
+                            db.collection("users").doc(user.uid).collection("likedposts").doc(ids)["delete"]();
+                            db.collection("posts").doc(ids).update({
+                                likes: posts.likes - 1
+                            });
+                        }
                     });
                 }
             });
             return [2 /*return*/];
         });
     }); });
-}
-function hi(parameters) {
-    return __awaiter(this, void 0, void 0, function () {
-        var no;
-        return __generator(this, function (_a) {
-            console.log(parameters.hi1);
-            no = parameters.hi1.toString();
-            console.log(no);
-            console.log(parameters.ids);
-            console.log(parameters.user.uid);
-            if (no.includes(parameters.ids) == false) {
-                db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids).set({});
-                db.collection("posts").doc(parameters.ids).update({
-                    likes: parameters.posts.likes + 1
-                });
-                console.log("not liked");
+    //deleting a post
+    document.getElementById("deletebtn-" + ids).addEventListener("click", function () {
+        auth.onAuthStateChanged(function (user) {
+            if (user.uid == posts.id) {
+                db.collection("posts").doc(ids)["delete"]();
             }
-            else if (no.includes(parameters.ids) == true) {
-                db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids)["delete"]();
-                db.collection("posts").doc(parameters.ids).update({
-                    likes: parameters.posts.likes - 1
-                });
-                console.log("liked");
-            }
-            return [2 /*return*/];
         });
     });
 }
@@ -159,21 +153,6 @@ function displayBlogs(doc, ids) {
     if (blogtitle.innerHTML == "undefined") {
         div.remove();
     }
-}
-//delete posts
-function deletePost(ids, doc) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            document.getElementById("deletebtn-" + ids).addEventListener("click", function () {
-                auth.onAuthStateChanged(function (user) {
-                    if (user.uid == doc.id) {
-                        db.collection("posts").doc(ids)["delete"]();
-                    }
-                });
-            });
-            return [2 /*return*/];
-        });
-    });
 }
 //search posts
 function searchBlog(doc, ids) {

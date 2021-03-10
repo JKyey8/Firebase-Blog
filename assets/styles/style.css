@@ -67,6 +67,7 @@ navbar input, navbar textarea {
   top: 10vh;
   z-index: 5;
   background-color: #EEEEEE;
+  display: block;
 }
 
 #preloader #loader {

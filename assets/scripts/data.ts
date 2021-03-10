@@ -6,16 +6,22 @@ const blogcontainer = document.getElementById("blogposts")
 db.collection("posts")
 .orderBy("id", "desc")
 .onSnapshot((querySnapshot) => {
+document.getElementById("preloader").style.display = "block"
 blogcontainer.innerHTML = "";
 let posts
+let ids;
+let allpostids = [];
 querySnapshot.forEach((doc) => {
 posts = doc.data()
-let ids = doc.id
+ ids = doc.id
 displayBlogs(posts, ids)
-likePost(ids, posts)
-deletePost(ids, posts)
+PostFunctions(ids, posts)
 searchBlog(posts, ids)
+
+allpostids.push(ids)
+
 });
+
 document.getElementById("preloader").style.display = "none"
 
 });
@@ -37,123 +43,72 @@ document.getElementById("preloader").style.display = "none"
 })
 */
 
-
-
-
-
-
-
+function PostFunctions(ids, posts){
 // liking posts
-let isLiked = false;
-function likePost(ids, posts){
 
 document.getElementById("likebtn-" + ids).addEventListener("click", async () => {
-console.log(posts.id)
-console.log(ids)
 
-let hi1 = [];
+
+let user;
+let userlikedposts = [];
 
 
 //check if user is logged in
-firebase.auth().onAuthStateChanged(function (userCredentials) {
+auth.onAuthStateChanged((userCredentials) => {
   if (userCredentials) {
-//@ts-ignore
 
-let user = userCredentials
-
-
-
-
-
-
-
-
+user = userCredentials
 db.collection("users").doc(user.uid).collection("likedposts").get().then((snapshot) => {
 
 snapshot.forEach((doc) => {
-
 let likedpostsId = doc.id
-hi1.push(likedpostsId)
+userlikedposts.push(likedpostsId)
 
 });
 
+let likedpostsId = userlikedposts.toString()
+//liking posts
+if(likedpostsId.includes(ids) == false){
+db.collection("users").doc(user.uid).collection("likedposts").doc(ids).set({});
+
+db.collection("posts").doc(ids).update({
+likes:posts.likes + 1
+});
+
+document.getElementById
+} else if(likedpostsId.includes(ids) == true) {
+
+db.collection("users").doc(user.uid).collection("likedposts").doc(ids).delete();
+
+db.collection("posts").doc(ids).update({
+likes:posts.likes - 1
+});
+
+}
 
 
-
-
-hi({hi1, ids, posts, user})
 })
 
   } 
 
 } )
 
+})
 
-/*
-db.collection("users").doc(posts.id).collection("likedposts").onSnapshot(  (snapshot) =>{
-
- snapshot.forEach((doc) => {
-
-let likedpostsId = doc.id
-hi1.push(likedpostsId)
-
-
- })
-hi(hi1, ids, posts)
-
- })
-*/
+//deleting a post
+document.getElementById("deletebtn-" + ids).addEventListener("click", () => {
+auth.onAuthStateChanged((user) => {
+if(user.uid == posts.id){
+db.collection("posts").doc(ids).delete()
+}
 
 
 })
-}
-
-
-async function hi(parameters) {
-console.log(parameters.hi1)
-let no = parameters.hi1.toString()
-console.log(no)
-console.log(parameters.ids)
-
-console.log(parameters.user.uid)
-
-
-if(no.includes(parameters.ids) == false){
-db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids).set({});
-
-db.collection("posts").doc(parameters.ids).update({
-likes:parameters.posts.likes + 1
-});
-
-
-console.log("not liked")
-} else if(no.includes(parameters.ids) == true) {
-
-db.collection("users").doc(parameters.user.uid).collection("likedposts").doc(parameters.ids).delete();
-
-
-db.collection("posts").doc(parameters.ids).update({
-likes:parameters.posts.likes - 1
-});
-
-
-console.log("liked")
-
-}
-
-
-
+})
 
 
 
 }
-
-
-
-
-
-
-
 
 //dispalay the blogs
 function displayBlogs(doc, ids) {
@@ -200,27 +155,6 @@ div.remove();
 }
 
 }
-
-//delete posts
-async function deletePost(ids, doc){
-document.getElementById("deletebtn-" + ids).addEventListener("click", () => {
-
-
-
-
-auth.onAuthStateChanged((user) => {
-if(user.uid == doc.id){
-db.collection("posts").doc(ids).delete()
-}
-
-
-})
-})
-}
-
-
-
-
 
 
 //search posts

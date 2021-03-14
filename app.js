@@ -1,7 +1,11 @@
 
-let express = require('express')
+const express = require('express')
 
-let app = express();
+const app = express();
+
+
+const router = express.Router();
+app.use("./netlify/functions/test", router)
 
 app.use(express.static((__dirname)));
 

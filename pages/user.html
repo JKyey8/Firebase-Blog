@@ -12,22 +12,40 @@
   <h1>Create a New Blog</h1>
 
 
+<button id="bye">
+hello
 
+</button>
 
 
 
   
 
+ <script>var exports = []; </script>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"> </script>
 
 <script>
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
- 
+  var firebaseConfig = {
+    apiKey: "AIzaSyAqq_sln1epLeTCTrJoHvHtJUttZWIIAIE",
+    authDomain: "blog-with-fetch-api-d1fc2.firebaseapp.com",
+    projectId: "blog-with-fetch-api-d1fc2",
+    storageBucket: "blog-with-fetch-api-d1fc2.appspot.com",
+    messagingSenderId: "578971062320",
+    appId: "1:578971062320:web:aefa7a8ecac2d7000a1df5",
+    measurementId: "G-DP6MSH6JDF"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
 </script>
 
 <script src="/assets/scripts/dist/user.js"></script>

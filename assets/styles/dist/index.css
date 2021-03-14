@@ -216,14 +216,3 @@ navbar input, navbar textarea {
   word-wrap: break-word;
   padding: 0.625rem;
 }
-.blogs form {
-  width: 30vw;
-}
-.blogs form input, .blogs form textarea {
-  display: block;
-  margin: 1rem 0;
-  padding: 0.5rem 0.625rem;
-  width: 100%;
-  border: 0.15rem solid #0094C6;
-  font-family: "Roboto";
-}

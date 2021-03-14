@@ -81,7 +81,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 document.getElementById("user-signedout-btns").style.display = "none"
 
 document.getElementById("user-signedin-btns").style.display = "flex"
-document.getElementById("user-profile").innerHTML = user.email
+
 
   } else {
   document.getElementById("user-signedout-btns").style.display = "flex"

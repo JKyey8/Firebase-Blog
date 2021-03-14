@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,OAAO,CAAC,wFAAI",
+    "sources": [
+        "user.scss",
+        "_misc.scss"
+    ],
+    "names": [],
+    "file": "user.css"
+}

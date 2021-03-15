@@ -18,13 +18,17 @@
   <a href="/">BAck to home</a>
   <h1>Create a New Blog</h1>
 
-  <form id="newitem" >
+  <form id="newitem" method="POST" action="/newblog" >
     <input type="text" name="title" id="title" required placeholder="Blog title">
     <textarea name="postbody" id="postbody"  required placeholder="Blog body"></textarea>
     <button>Create</button>
   </form>
 
-
+  <form id="hello" method="POST" action="/newblog" >
+    <input type="text" name="title" id="title" required placeholder="Blog title">
+    <textarea name="postbody" id="postbody"  required placeholder="Blog body"></textarea>
+    <button>Create</button>
+  </form>
 
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>

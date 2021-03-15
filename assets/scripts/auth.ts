@@ -82,6 +82,7 @@ document.getElementById("user-signedout-btns").style.display = "none"
 
 document.getElementById("user-signedin-btns").style.display = "flex"
 
+
 document.getElementById("user-profile").addEventListener("click", function(){
 
 window.location.replace("/user/" + user.email)

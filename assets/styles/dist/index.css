@@ -15,6 +15,10 @@ html {
   overflow-x: auto;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background-color: #EEEEEE;
   font-family: "Roboto";

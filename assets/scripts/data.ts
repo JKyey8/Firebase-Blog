@@ -26,7 +26,7 @@ querySnapshot.forEach((doc) => {
 posts = doc.data()
 ids = doc.id
 currentlikes = posts.likes
-console.log(currentlikes)
+
 PostFunctions(posts, ids, currentlikes)
 });
 
@@ -41,7 +41,7 @@ document.getElementById("preloader").style.display = "none"
 async function getData(){
 
 db.collection("posts")
-.orderBy("id", "desc")
+.orderBy("date", "desc")
 .get()
 .then((snapshot) => {
 document.getElementById("preloader").style.display = "block"
@@ -113,7 +113,11 @@ document.getElementById("blog-" + ids).style.borderColor = "purple"
 
 })
 
-  } 
+  } else {
+
+
+console.log("not signed in")
+}
 
 } )
 
@@ -184,7 +188,10 @@ document.getElementById("blog-" + ids).style.borderColor = "purple"
 
 })
 
-  } 
+  } else{
+
+console.log("not signed in")
+}
 
 } )
 

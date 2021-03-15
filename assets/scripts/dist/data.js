@@ -66,7 +66,6 @@ function realtimeData() {
                             posts = doc.data();
                             ids = doc.id;
                             currentlikes = posts.likes;
-                            console.log(currentlikes);
                             PostFunctions(posts, ids, currentlikes);
                         });
                         document.getElementById("preloader").style.display = "none";
@@ -81,7 +80,7 @@ function getData() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             db.collection("posts")
-                .orderBy("id", "desc")
+                .orderBy("date", "desc")
                 .get()
                 .then(function (snapshot) {
                 document.getElementById("preloader").style.display = "block";
@@ -133,6 +132,9 @@ function changeLikes(posts, ids, currentlikes) {
                         }
                     });
                 }
+                else {
+                    console.log("not signed in");
+                }
             });
             return [2 /*return*/];
         });
@@ -171,6 +173,9 @@ function PostFunctions(posts, ids, currentlikes) {
                             document.getElementById("blog-" + ids).style.borderColor = "purple";
                         }
                     });
+                }
+                else {
+                    console.log("not signed in");
                 }
             });
             return [2 /*return*/];

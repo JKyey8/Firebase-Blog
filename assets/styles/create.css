@@ -1,2 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+form {
+  width: 30vw;
+}
+
+form input, form textarea {
+  display: block;
+  margin: 1rem 0;
+  padding: .5rem .625rem;
+  width: 100%;
+  border: 0.15rem solid #0094C6;
+  font-family: 'Roboto';
+}
 /*# sourceMappingURL=create.css.map */

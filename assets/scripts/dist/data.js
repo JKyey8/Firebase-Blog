@@ -35,41 +35,110 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var blogcontainer = document.getElementById("blogposts");
-//real time data for posts
-db.collection("posts")
-    .orderBy("id", "desc")
-    .onSnapshot(function (querySnapshot) {
-    document.getElementById("preloader").style.display = "block";
-    blogcontainer.innerHTML = "";
-    var posts;
-    var ids;
-    var allpostids = [];
-    querySnapshot.forEach(function (doc) {
-        posts = doc.data();
-        ids = doc.id;
-        displayBlogs(posts, ids);
-        PostFunctions(ids, posts);
-        searchBlog(posts, ids);
-        allpostids.push(ids);
+document.addEventListener('DOMContentLoaded', function () {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getData()];
+                case 1:
+                    _a.sent();
+                    realtimeData();
+                    return [2 /*return*/];
+            }
+        });
     });
-    document.getElementById("preloader").style.display = "none";
 });
-/*
+//real time data for posts
+function realtimeData() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getData()];
+                case 1:
+                    _a.sent();
+                    db.collection("posts")
+                        .orderBy("id", "desc")
+                        .onSnapshot(function (querySnapshot) {
+                        var posts;
+                        var ids;
+                        var currentlikes;
+                        querySnapshot.forEach(function (doc) {
+                            posts = doc.data();
+                            ids = doc.id;
+                            currentlikes = posts.likes;
+                            console.log(currentlikes);
+                            PostFunctions(posts, ids, currentlikes);
+                        });
+                        document.getElementById("preloader").style.display = "none";
+                    });
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
 //getting data(need refesh for new data)
-db.collection("posts")
-.orderBy("id", "desc")
-.get()
-.then((snapshot) => {
-blogcontainer.innerHTML = "";
-let posts
-snapshot.forEach((doc) => {
-posts = doc.data()
-let ids = doc.id
-})
-document.getElementById("preloader").style.display = "none"
-})
-*/
-function PostFunctions(ids, posts) {
+function getData() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            db.collection("posts")
+                .orderBy("id", "desc")
+                .get()
+                .then(function (snapshot) {
+                document.getElementById("preloader").style.display = "block";
+                blogcontainer.innerHTML = "";
+                var posts;
+                var ids;
+                var currentlikes;
+                snapshot.forEach(function (doc) {
+                    posts = doc.data();
+                    ids = doc.id;
+                    currentlikes = posts.likes;
+                    searchBlog(posts, ids);
+                    displayBlogs(posts, ids, currentlikes);
+                    changeLikes(posts, ids, currentlikes);
+                });
+                document.getElementById("preloader").style.display = "none";
+            });
+            return [2 /*return*/];
+        });
+    });
+}
+function changeLikes(posts, ids, currentlikes) {
+    // liking posts
+    var _this = this;
+    document.getElementById("likebtn-" + ids).addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
+        var user, userlikedposts;
+        return __generator(this, function (_a) {
+            userlikedposts = [];
+            //check if user is logged in
+            auth.onAuthStateChanged(function (userCredentials) {
+                if (userCredentials) {
+                    user = userCredentials;
+                    db.collection("users").doc(user.uid).collection("likedposts").get().then(function (snapshot) {
+                        snapshot.forEach(function (doc) {
+                            var likedpostsId = doc.id;
+                            userlikedposts.push(likedpostsId);
+                        });
+                        var likedpostsId = userlikedposts.toString();
+                        //liking posts
+                        if (likedpostsId.includes(ids) == false) {
+                            currentlikes = currentlikes + 1;
+                            document.getElementById("likes-" + ids).innerHTML = currentlikes + " likes";
+                            document.getElementById("blog-" + ids).style.borderColor = "red";
+                        }
+                        else if (likedpostsId.includes(ids) == true) {
+                            currentlikes = currentlikes - 1;
+                            document.getElementById("likes-" + ids).innerHTML = currentlikes + " likes";
+                            document.getElementById("blog-" + ids).style.borderColor = "purple";
+                        }
+                    });
+                }
+            });
+            return [2 /*return*/];
+        });
+    }); });
+}
+function PostFunctions(posts, ids, currentlikes) {
     // liking posts
     var _this = this;
     document.getElementById("likebtn-" + ids).addEventListener("click", function () { return __awaiter(_this, void 0, void 0, function () {
@@ -90,15 +159,16 @@ function PostFunctions(ids, posts) {
                         if (likedpostsId.includes(ids) == false) {
                             db.collection("users").doc(user.uid).collection("likedposts").doc(ids).set({});
                             db.collection("posts").doc(ids).update({
-                                likes: posts.likes + 1
+                                likes: currentlikes + 1
                             });
-                            document.getElementById;
+                            document.getElementById("blog-" + ids).style.borderColor = "red";
                         }
                         else if (likedpostsId.includes(ids) == true) {
                             db.collection("users").doc(user.uid).collection("likedposts").doc(ids)["delete"]();
                             db.collection("posts").doc(ids).update({
-                                likes: posts.likes - 1
+                                likes: currentlikes - 1
                             });
+                            document.getElementById("blog-" + ids).style.borderColor = "purple";
                         }
                     });
                 }
@@ -112,11 +182,12 @@ function PostFunctions(ids, posts) {
             if (user.uid == posts.id) {
                 db.collection("posts").doc(ids)["delete"]();
             }
+            document.getElementById("blog-" + ids).remove();
         });
     });
 }
 //dispalay the blogs
-function displayBlogs(doc, ids) {
+function displayBlogs(doc, ids, currentlikes) {
     var div = document.createElement("div");
     var blogtitle = document.createElement("h2");
     var blogtext = document.createElement("p");
@@ -130,6 +201,7 @@ function displayBlogs(doc, ids) {
     deletebtn.className = "deletepost";
     deletebtn.id = "deletebtn-" + ids;
     addlike.id = "likebtn-" + ids;
+    bloglikes.id = "likes-" + ids;
     bloglikes.className = "textlikes";
     blogtitle.className = "textheader";
     blogtext.className = "textzone";
@@ -137,7 +209,7 @@ function displayBlogs(doc, ids) {
     div.id = "blog-" + ids;
     addlike.innerHTML = "Like";
     blogtext.innerHTML = doc.body;
-    bloglikes.innerHTML = doc.likes + " likes";
+    bloglikes.innerHTML = currentlikes + " likes";
     blogtitle.innerHTML = doc.title;
     deletebtn.innerHTML = "delete post";
     div.appendChild(blogtitle);

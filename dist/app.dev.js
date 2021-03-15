@@ -3,8 +3,6 @@
 var express = require('express');
 
 var app = express();
-var router = express.Router();
-app.use("./netlify/functions/test", router);
 app.use(express["static"](__dirname));
 app.get("/", function (req, res) {
   res.sendfile(__dirname + "/index.html");
@@ -12,4 +10,7 @@ app.get("/", function (req, res) {
 app.get("/user/:id", function (req, res) {
   res.sendfile(__dirname + "/pages/user.html");
 });
-app.listen(3000);
+app.get("/create", function (req, res) {
+  res.sendfile(__dirname + "/pages/create.html");
+});
+app.listen(5500, '127.0.0.1');

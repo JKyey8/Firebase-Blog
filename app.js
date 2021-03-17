@@ -1,5 +1,3 @@
-
-
 var firebase = require("firebase")
 var firebaseConfig = {
     apiKey: "AIzaSyAqq_sln1epLeTCTrJoHvHtJUttZWIIAIE",
@@ -15,7 +13,6 @@ var firebaseConfig = {
 const db = firebase.firestore();
 const auth = firebase.auth();
 const express = require('express')
-
 const app = express();
 
 //middleware
@@ -23,6 +20,13 @@ const app = express();
 app.use(express.static((__dirname)));
 //being able t get stuff from formns
 app.use(express.urlencoded({ extended: true })); 
+app.use(express.json());
+
+
+
+var user = auth.currentUser
+
+
 
 app.get("/", function(req,res) {
 
@@ -32,9 +36,12 @@ res.sendfile(__dirname + "/index.html")
 
 
 
-app.get("/user/:id", function(req,res){
+app.get("/user/:id", function(req,res, next){
 
 res.sendfile(__dirname + "/pages/user.html")
+
+
+//console.log(req.params.id)
 
 })
 
@@ -46,16 +53,32 @@ res.sendfile(__dirname + "/pages/create.html")
 })
 
 app.post("/newblog", ((req,res) => {
-console.log(req.body)
+
+//console.log(req.body)
+}));
+
+
+app.post("/datahi", ((req,res) => {
+console.log("hi")
+
+db.collection("users").onSnapshot((querySnapshot) => {
+
+querySnapshot.forEach((doc) => {
+if(doc.id == req.body.uid){
+console.log(req.body.email)
+} else {
+
+
+}
+
+})
+
+})
 
 
 
-
-
-
-
-
-}))
+//console.log(req.body)
+}));
 
 
 
@@ -70,3 +93,4 @@ res.sendFile(__dirname + "/pages/404.html")
 
 app.listen(5500, '127.0.0.1')
 
+console.log("listening on http://127.0.0.1:5500/")

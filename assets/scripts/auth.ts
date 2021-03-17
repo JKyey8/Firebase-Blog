@@ -46,7 +46,7 @@ document.getElementById("signup-page").style.display = "none";
 
 
 
-//sign in user
+//loginn user
 document.getElementById("login-form").addEventListener("submit", async (e) => {
 
 e.preventDefault();
@@ -60,7 +60,13 @@ await firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
     // Signed in
     var user = userCredential.user;
 
-
+fetch('/datahi', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(user),
+})
 
 
 
@@ -72,10 +78,17 @@ document.getElementById("login-page").style.display = "none";
 
 
 //check if user is logged in
-firebase.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged(async function (user) {
   if (user) {
 //@ts-ignore
-
+fetch("/loginuser"), {
+method: "POST",
+Headers:{
+Accept:"application/json",
+"Content-Type":"application/json"
+},
+body:JSON.stringify({user})
+}
 
 
 document.getElementById("user-signedout-btns").style.display = "none"

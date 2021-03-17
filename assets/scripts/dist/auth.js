@@ -76,7 +76,7 @@ document.getElementById("signup-form").addEventListener("submit", function (e) {
         }
     });
 }); });
-//sign in user
+//loginn user
 document.getElementById("login-form").addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
     var LIemail, LIpassword;
     return __generator(this, function (_a) {
@@ -89,6 +89,13 @@ document.getElementById("login-form").addEventListener("submit", function (e) { 
                         .then(function (userCredential) {
                         // Signed in
                         var user = userCredential.user;
+                        fetch('/datahi', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(user)
+                        });
                     })];
             case 1:
                 _a.sent();
@@ -99,18 +106,31 @@ document.getElementById("login-form").addEventListener("submit", function (e) { 
 }); });
 //check if user is logged in
 firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        //@ts-ignore
-        document.getElementById("user-signedout-btns").style.display = "none";
-        document.getElementById("user-signedin-btns").style.display = "flex";
-        document.getElementById("user-profile").addEventListener("click", function () {
-            window.location.replace("/user/" + user.email);
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            if (user) {
+                //@ts-ignore
+                fetch("/loginuser"), {
+                    method: "POST",
+                    Headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ user: user })
+                };
+                document.getElementById("user-signedout-btns").style.display = "none";
+                document.getElementById("user-signedin-btns").style.display = "flex";
+                document.getElementById("user-profile").addEventListener("click", function () {
+                    window.location.replace("/user/" + user.email);
+                });
+            }
+            else {
+                document.getElementById("user-signedout-btns").style.display = "flex";
+                document.getElementById("user-signedin-btns").style.display = "none";
+            }
+            return [2 /*return*/];
         });
-    }
-    else {
-        document.getElementById("user-signedout-btns").style.display = "flex";
-        document.getElementById("user-signedin-btns").style.display = "none";
-    }
+    });
 });
 //log out
 var logoutbtn = document.getElementById("logoutbtn");

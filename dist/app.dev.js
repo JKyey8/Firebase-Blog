@@ -26,19 +26,31 @@ app.use(express["static"](__dirname)); //being able t get stuff from formns
 app.use(express.urlencoded({
   extended: true
 }));
+app.use(express.json());
+var user = auth.currentUser;
 app.get("/", function (req, res) {
   res.sendfile(__dirname + "/index.html");
 });
-app.get("/user/:id", function (req, res) {
-  res.sendfile(__dirname + "/pages/user.html");
+app.get("/user/:id", function (req, res, next) {
+  res.sendfile(__dirname + "/pages/user.html"); //console.log(req.params.id)
 });
 app.get("/create", function (req, res) {
   res.sendfile(__dirname + "/pages/create.html");
 });
-app.post("/newblog", function (req, res) {
-  console.log(req.body);
+app.post("/newblog", function (req, res) {//console.log(req.body)
+});
+app.post("/datahi", function (req, res) {
+  console.log("hi");
+  db.collection("users").onSnapshot(function (querySnapshot) {
+    querySnapshot.forEach(function (doc) {
+      if (doc.id == req.body.uid) {
+        console.log(req.body.email);
+      } else {}
+    });
+  }); //console.log(req.body)
 });
 app.use(function (req, res) {
   res.sendFile(__dirname + "/pages/404.html");
 });
 app.listen(5500, '127.0.0.1');
+console.log("listening on http://127.0.0.1:5500/");

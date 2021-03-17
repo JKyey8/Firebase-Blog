@@ -37,12 +37,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var blogcontainer = document.getElementById("blogposts");
 document.addEventListener('DOMContentLoaded', function () {
     return __awaiter(this, void 0, void 0, function () {
+        var data;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getData()];
                 case 1:
                     _a.sent();
                     realtimeData();
+                    data = { username: 'example' };
+                    fetch('/datahi', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(function (response) { return response.json(); })
+                        .then(function (data) {
+                        console.log('Success:', data);
+                    })["catch"](function (error) {
+                        console.error('Error:', error);
+                    });
                     return [2 /*return*/];
             }
         });

@@ -28,7 +28,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 var PORT = process.env.PORT || 5050;
-app.get("https://revird-blog.herokuapp.com/", function (req, res) {
+app.get("/", function (req, res) {
   res.sendfile(__dirname + "/index.html");
 });
 app.get("/user/:id", function (req, res, next) {

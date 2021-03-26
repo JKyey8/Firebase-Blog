@@ -98,6 +98,5 @@ res.sendFile(__dirname + "/pages/404.html")
 
 
 
-app.listen(PORT, '127.0.0.1')
+app.listen(PORT)
 
-console.log("listening on http://127.0.0.1:5500/")

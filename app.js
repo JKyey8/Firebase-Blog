@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-
+var PORT = process.env.PORT || 5050
 
 
 
@@ -60,7 +60,7 @@ res.sendfile(__dirname + "/pages/create.html")
 
 app.post("/newblog", ((req,res) => {
 
-//console.log(req.body)
+console.log(req.body)
 }));
 
 
@@ -98,6 +98,6 @@ res.sendFile(__dirname + "/pages/404.html")
 
 
 
-app.listen(5500, '127.0.0.1')
+app.listen(PORT, '127.0.0.1')
 
 console.log("listening on http://127.0.0.1:5500/")

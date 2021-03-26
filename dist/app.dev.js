@@ -27,6 +27,7 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(express.json());
+var PORT = process.env.PORT || 5050;
 app.get("/", function (req, res) {
   res.sendfile(__dirname + "/index.html");
 });
@@ -40,7 +41,8 @@ app.get("/profile", function (req, res) {
 app.get("/create", function (req, res) {
   res.sendfile(__dirname + "/pages/create.html");
 });
-app.post("/newblog", function (req, res) {//console.log(req.body)
+app.post("/newblog", function (req, res) {
+  console.log(req.body);
 });
 app.post("/user-signin", function (req, res) {
   db.collection("users").onSnapshot(function (querySnapshot) {
@@ -55,5 +57,5 @@ app.post("/user-signin", function (req, res) {
 app.use(function (req, res) {
   res.sendFile(__dirname + "/pages/404.html");
 });
-app.listen(5500, '127.0.0.1');
+app.listen(PORT, '127.0.0.1');
 console.log("listening on http://127.0.0.1:5500/");

@@ -28,7 +28,7 @@ var PORT = process.env.PORT || 5050
 
 
 
-app.get("/", function(req,res) {
+app.get("https://revird-blog.herokuapp.com/", function(req,res) {
 
 res.sendfile(__dirname + "/index.html")
 

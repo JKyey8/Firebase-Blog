@@ -89,7 +89,7 @@ document.getElementById("login-form").addEventListener("submit", function (e) { 
                         .then(function (userCredential) {
                         // Signed in
                         var user = userCredential.user;
-                        fetch('/datahi', {
+                        fetch('/user-signin', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

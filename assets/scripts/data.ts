@@ -5,7 +5,7 @@ await getData();
 
  realtimeData();
 
-
+/*
 const data = { username: 'example' };
 
 fetch('/datahi', {
@@ -23,7 +23,7 @@ fetch('/datahi', {
   console.error('Error:', error);
 });
 
-
+*/
 })
 
 

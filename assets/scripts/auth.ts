@@ -60,18 +60,22 @@ await firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
     // Signed in
     var user = userCredential.user;
 
-fetch('/datahi', {
+fetch('/user-signin', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(user),
-})
+});
+
+
+
 
 
 
   })
 document.getElementById("login-page").style.display = "none";
+
 });
 
 

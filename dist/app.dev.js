@@ -27,24 +27,27 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.use(express.json());
-var user = auth.currentUser;
 app.get("/", function (req, res) {
   res.sendfile(__dirname + "/index.html");
 });
 app.get("/user/:id", function (req, res, next) {
   res.sendfile(__dirname + "/pages/user.html"); //console.log(req.params.id)
 });
+app.get("/profile", function (req, res) {
+  console.log(req.body);
+  res;
+});
 app.get("/create", function (req, res) {
   res.sendfile(__dirname + "/pages/create.html");
 });
 app.post("/newblog", function (req, res) {//console.log(req.body)
 });
-app.post("/datahi", function (req, res) {
-  console.log("hi");
+app.post("/user-signin", function (req, res) {
   db.collection("users").onSnapshot(function (querySnapshot) {
     querySnapshot.forEach(function (doc) {
       if (doc.id == req.body.uid) {
-        console.log(req.body.email);
+        console.log(req.body);
+        res.send(req.params);
       } else {}
     });
   }); //console.log(req.body)

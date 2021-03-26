@@ -24,7 +24,7 @@ app.use(express.json());
 
 
 
-var user = auth.currentUser
+
 
 
 
@@ -46,6 +46,12 @@ res.sendfile(__dirname + "/pages/user.html")
 })
 
 
+app.get("/profile", ((req,res) => {
+console.log(req.body)
+
+res
+}))
+
 app.get("/create", function(req,res){
 
 res.sendfile(__dirname + "/pages/create.html")
@@ -58,14 +64,15 @@ app.post("/newblog", ((req,res) => {
 }));
 
 
-app.post("/datahi", ((req,res) => {
-console.log("hi")
+app.post("/user-signin", ((req,res) => {
+
 
 db.collection("users").onSnapshot((querySnapshot) => {
 
 querySnapshot.forEach((doc) => {
 if(doc.id == req.body.uid){
-console.log(req.body.email)
+console.log(req.body)
+res.send(req.params)
 } else {
 
 

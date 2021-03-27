@@ -22,15 +22,18 @@ app.use(express.static((__dirname)));
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
 
-
+//setting a port with heroku or local
 var PORT = process.env.PORT || 5500
 
 
+//adding view engine(ejs)
+app.set("view engine", "ejs")
+app.set("views", "pages")
 
 
 app.get("/", function(req,res) {
 
-res.sendfile(__dirname + "/index.html")
+res.render("index")
 
 })
 
@@ -38,7 +41,7 @@ res.sendfile(__dirname + "/index.html")
 
 app.get("/user/:id", function(req,res, next){
 
-res.sendfile(__dirname + "/pages/user.html")
+res.render("user")
 
 
 //console.log(req.params.id)
@@ -54,7 +57,7 @@ res
 
 app.get("/create", function(req,res){
 
-res.sendfile(__dirname + "/pages/create.html")
+res.render("create")
 
 })
 
@@ -90,7 +93,11 @@ res.send(req.params)
 
 
 app.use((req,res) => {
-res.sendFile(__dirname + "/pages/404.html")
+
+
+res.status(404).render("404")
+
+
 
 
 })

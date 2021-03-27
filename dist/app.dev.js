@@ -26,20 +26,24 @@ app.use(express["static"](__dirname)); //being able t get stuff from formns
 app.use(express.urlencoded({
   extended: true
 }));
-app.use(express.json());
-var PORT = process.env.PORT || 5500;
+app.use(express.json()); //setting a port with heroku or local
+
+var PORT = process.env.PORT || 5500; //adding view engine(ejs)
+
+app.set("view engine", "ejs");
+app.set("views", "pages");
 app.get("/", function (req, res) {
-  res.sendfile(__dirname + "/index.html");
+  res.render("index");
 });
 app.get("/user/:id", function (req, res, next) {
-  res.sendfile(__dirname + "/pages/user.html"); //console.log(req.params.id)
+  res.render("user"); //console.log(req.params.id)
 });
 app.get("/profile", function (req, res) {
   console.log(req.body);
   res;
 });
 app.get("/create", function (req, res) {
-  res.sendfile(__dirname + "/pages/create.html");
+  res.render("create");
 });
 app.post("/newblog", function (req, res) {
   console.log(req.body);
@@ -55,7 +59,7 @@ app.post("/user-signin", function (req, res) {
   }); //console.log(req.body)
 });
 app.use(function (req, res) {
-  res.sendFile(__dirname + "/pages/404.html");
+  res.status(404).render("404");
 });
 app.listen(PORT, "127.0.0.1");
 console.log("listening on http://127.0.0.1:" + PORT + "/");

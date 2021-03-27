@@ -14,6 +14,7 @@
     "debug": "^4.3.1",
     "dom-storage": "^2.1.0",
     "ecdsa-sig-formatter": "^1.0.11",
+    "ejs": "^3.1.6",
     "event-target-shim": "^5.0.1",
     "express": "^4.17.1",
     "extend": "^3.0.2",

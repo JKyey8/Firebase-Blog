@@ -14,6 +14,19 @@ const db = firebase.firestore();
 const auth = firebase.auth();
 const express = require('express')
 const app = express();
+var admin = require("firebase-admin")
+var firebaseapp = admin.initializeApp();
+
+
+
+
+function isAuth(){
+var user = firebase.auth().currentUser;
+return user
+
+
+}
+
 
 //middleware
 //static files
@@ -31,41 +44,12 @@ app.set("view engine", "ejs")
 app.set("views", "pages")
 
 
+ 
 app.get("/", function(req,res) {
 
 res.render("index")
 
 })
-
-
-
-app.get("/user/:id", function(req,res, next){
-
-res.render("user")
-
-
-//console.log(req.params.id)
-
-})
-
-
-app.get("/profile", ((req,res) => {
-console.log(req.body)
-
-res
-}))
-
-app.get("/create", function(req,res){
-
-res.render("create")
-
-})
-
-app.post("/newblog", ((req,res) => {
-
-console.log(req.body)
-}));
-
 
 app.post("/user-signin", ((req,res) => {
 
@@ -75,7 +59,15 @@ db.collection("users").onSnapshot((querySnapshot) => {
 querySnapshot.forEach((doc) => {
 if(doc.id == req.body.uid){
 console.log(req.body)
+
+let userinfo = req.body
+
+
 res.send(req.params)
+
+
+
+
 } else {
 
 
@@ -87,8 +79,31 @@ res.send(req.params)
 
 
 
-//console.log(req.body)
+
+}))
+
+app.get("/user/:id", function (req,res){
+res.render("user")
+
+
+
+
+//console.log(req.params.id)
+
+})
+
+
+
+
+
+
+app.post("/newblog", ((req,res) => {
+
+console.log(req.body)
 }));
+
+
+
 
 
 
@@ -101,6 +116,7 @@ res.status(404).render("404")
 
 
 })
+
 
 
 

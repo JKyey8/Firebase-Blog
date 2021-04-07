@@ -84,6 +84,7 @@ document.getElementById("login-page").style.display = "none";
 //check if user is logged in
 firebase.auth().onAuthStateChanged(async function (user) {
   if (user) {
+/*
 //@ts-ignore
 fetch("/loginuser"), {
 method: "POST",
@@ -93,20 +94,14 @@ Accept:"application/json",
 },
 body:JSON.stringify({user})
 }
-
+*/
 
 document.getElementById("user-signedout-btns").style.display = "none"
 
 document.getElementById("user-signedin-btns").style.display = "flex"
 
 
-document.getElementById("user-profile").addEventListener("click", function(){
 
-window.location.replace("/user/" + user.email)
-
-
-
-})
   } else {
   document.getElementById("user-signedout-btns").style.display = "flex"
 

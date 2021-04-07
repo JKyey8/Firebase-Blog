@@ -109,20 +109,19 @@ firebase.auth().onAuthStateChanged(function (user) {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             if (user) {
+                /*
                 //@ts-ignore
                 fetch("/loginuser"), {
-                    method: "POST",
-                    Headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ user: user })
-                };
+                method: "POST",
+                Headers:{
+                Accept:"application/json",
+                "Content-Type":"application/json"
+                },
+                body:JSON.stringify({user})
+                }
+                */
                 document.getElementById("user-signedout-btns").style.display = "none";
                 document.getElementById("user-signedin-btns").style.display = "flex";
-                document.getElementById("user-profile").addEventListener("click", function () {
-                    window.location.replace("/user/" + user.email);
-                });
             }
             else {
                 document.getElementById("user-signedout-btns").style.display = "flex";

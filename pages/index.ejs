@@ -20,7 +20,7 @@
 
 
 
-<h1>Blog Site</h1>
+<h1>Blog Site <%= foo %></h1>
 <form id="searchbar">
   <div class=”search-box”>
     <input type=”text”  id = "searchinput" class=”search-by-name” name=”searchinput” placeholder= "Search Blog by Title">
@@ -33,7 +33,7 @@
 
 <a href="/create" id="newpost">New Post</a>
 <button id="logoutbtn">Log Out</button>
-<a id="user-profile"  >Profile</a>
+<a id="user-profile"   >Profile</a>
 </div>
 <div id="user-signedout-btns">
 <button class="user-btn" id="loginbtn">Log In</button>
@@ -63,10 +63,10 @@
 <div class="user-portal" id="login-page">
 <button id="close-login">CLOSE</button>
 <p>Hey there</p>
-<form id="login-form" >
+<form id="login-form"  action="/user-signin" method="post" >
 
-<input type="email" id="email-login" name="email-login" placeholder="Email:"></input>
-<input type="password" id="password-login" name="password-login" placeholder="Password:"></input>
+<input type="email" id="email-login" name="emailLI" placeholder="Email:"></input>
+<input type="password" id="password-login" name="passwordLI" placeholder="Password:"></input>
 <input type="submit">Log in</input>
 </form>
 
@@ -82,6 +82,13 @@
 </div>
 </section>
 
+ <div>
+        <h1>Set price</h1>
+        <form action="/user-signin" method="POST">
+            <input type="text" name="price" placeholder="price" value="<%= foo%>">
+            <input type="submit" value="Set price">
+        </form>
+    </div>
  <script>var exports = []; </script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
@@ -111,6 +118,7 @@ const auth = firebase.auth();
 
 <script defer src="/assets/scripts/dist/data.js"></script>
 <script src="/assets/scripts/dist/auth.js"></script>
+
 
 
 

@@ -78,25 +78,44 @@ document.getElementById("signup-form").addEventListener("submit", function (e) {
 }); });
 //loginn user
 document.getElementById("login-form").addEventListener("submit", function (e) { return __awaiter(_this, void 0, void 0, function () {
-    var LIemail, LIpassword;
+    var LIemail, LIpassword, logininfo;
+    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 e.preventDefault();
                 LIemail = document.getElementById('email-login').value;
                 LIpassword = document.getElementById("password-login").value;
+                logininfo = { LIemail: LIemail, LIpassword: LIpassword };
                 return [4 /*yield*/, firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
-                        .then(function (userCredential) {
-                        // Signed in
-                        var user = userCredential.user;
-                        fetch('/user-signin', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(user)
+                        .then(function (userCredential) { return __awaiter(_this, void 0, void 0, function () {
+                        var user;
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0:
+                                    user = userCredential.user;
+                                    return [4 /*yield*/, fetch('/user-signin', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(user)
+                                        })];
+                                case 1:
+                                    _a.sent();
+                                    return [4 /*yield*/, fetch('/user-signin', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify(logininfo)
+                                        })];
+                                case 2:
+                                    _a.sent();
+                                    return [2 /*return*/];
+                            }
                         });
-                    })];
+                    }); })];
             case 1:
                 _a.sent();
                 document.getElementById("login-page").style.display = "none";
@@ -104,9 +123,18 @@ document.getElementById("login-form").addEventListener("submit", function (e) { 
         }
     });
 }); });
+var user = firebase.auth().currentUser;
+if (user) {
+    console.log("yes");
+    // User is signed in.
+}
+else {
+    // No user is signed in.
+}
 //check if user is logged in
 firebase.auth().onAuthStateChanged(function (user) {
     return __awaiter(this, void 0, void 0, function () {
+        var profileLink;
         return __generator(this, function (_a) {
             if (user) {
                 /*
@@ -120,8 +148,19 @@ firebase.auth().onAuthStateChanged(function (user) {
                 body:JSON.stringify({user})
                 }
                 */
+                console.log("hi");
                 document.getElementById("user-signedout-btns").style.display = "none";
                 document.getElementById("user-signedin-btns").style.display = "flex";
+                profileLink = document.getElementById("user-profile");
+                profileLink.setAttribute("href", "/user/" + user.email);
+                /*document.getElementById("user-profile").addEventListener("click", function(){
+               
+               window.location.replace("/user/" + user.email)
+               
+               
+               
+               })
+               */
             }
             else {
                 document.getElementById("user-signedout-btns").style.display = "flex";

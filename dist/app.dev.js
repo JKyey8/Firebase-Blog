@@ -22,14 +22,8 @@ var app = express();
 
 var admin = require("firebase-admin");
 
-var firebaseapp = admin.initializeApp();
-
-function isAuth() {
-  var user = firebase.auth().currentUser;
-  return user;
-} //middleware
+var firebaseapp = admin.initializeApp(); //middleware
 //static files
-
 
 app.use(express["static"](__dirname)); //being able t get stuff from formns
 
@@ -43,21 +37,60 @@ var PORT = process.env.PORT || 5500; //adding view engine(ejs)
 app.set("view engine", "ejs");
 app.set("views", "pages");
 app.get("/", function (req, res) {
-  res.render("index");
+  res.render("index", {
+    foo: "no"
+  });
 });
-app.post("/user-signin", function (req, res) {
-  db.collection("users").onSnapshot(function (querySnapshot) {
-    querySnapshot.forEach(function (doc) {
-      if (doc.id == req.body.uid) {
-        console.log(req.body);
-        var userinfo = req.body;
-        res.send(req.params);
-      } else {}
+/*
+app.get('/', function(req, res){
+currentPrice = 0
+grandTotal = 0
+
+    res.render('test' , {
+        currentPrice,
+        grandTotal,
+foo:"old"
     });
+});
+
+app.post('/set-price', function(req, res){
+    let price = req.body.price;
+    currentPrice = price;
+grandTotal = 0
+    res.render('test' , {
+        currentPrice,
+        grandTotal,
+foo:"new"
+    });
+});
+*/
+
+app.post("/user-signin", function _callee(req, res) {
+  return regeneratorRuntime.async(function _callee$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          console.log(req.body);
+          res.render("index", {
+            foo: "hi"
+          });
+
+        case 2:
+        case "end":
+          return _context.stop();
+      }
+    }
   });
 });
 app.get("/user/:id", function (req, res) {
-  res.render("user"); //console.log(req.params.id)
+  res.render("user", {
+    email: req.params.id
+  });
+  console.log(req.params);
+});
+app.get("/create", function (req, res) {
+  res.render("create");
+  console.log(req.params);
 });
 app.post("/newblog", function (req, res) {
   console.log(req.body);

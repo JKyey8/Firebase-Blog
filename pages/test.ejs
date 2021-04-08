@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/assets/styles/dist/index.css">
+    <title>JSON server</title>
+</head>
+<body>
+    
+
+
+<div class="container">
+
+    <h1>Express shop <%= foo %></h1>
+
+    <div>
+        <div><span class="label">Total bought:</span> <%= grandTotal %> </div>
+    </div>
+
+    <div>
+        <h1>Buy</h1>
+        <form action="/buy" method="post">
+            <input type="text" name="qty" placeholder="Buy how many" value="">
+            <input type="submit" value="Buy">
+        </form>
+    </div>
+
+    <div>
+        <h1>Set price</h1>
+        <form action="/set-price" method="POST">
+            <input type="text" name="price" placeholder="price" value="<%= currentPrice %>">
+            <input type="submit" value="Set price">
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

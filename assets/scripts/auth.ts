@@ -47,20 +47,25 @@ document.getElementById("signup-page").style.display = "none";
 
 
 //loginn user
+
 document.getElementById("login-form").addEventListener("submit", async (e) => {
 
+
 e.preventDefault();
+
+
 //@ts-ignore
 let LIemail =  document.getElementById('email-login').value;
 //@ts-ignore
 let LIpassword = document.getElementById("password-login").value;
+let logininfo = {LIemail, LIpassword}
 
 await firebase.auth().signInWithEmailAndPassword(LIemail, LIpassword)
-  .then((userCredential) => {
+  .then( async(userCredential) => {
     // Signed in
     var user = userCredential.user;
 
-fetch('/user-signin', {
+await fetch('/user-signin', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
@@ -69,14 +74,48 @@ fetch('/user-signin', {
 });
 
 
-
-
-
+await fetch('/user-signin', {
+  method: 'POST', // or 'PUT'
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(logininfo),
+});
 
   })
+
 document.getElementById("login-page").style.display = "none";
 
+
 });
+
+var user = firebase.auth().currentUser;
+
+if (user) {
+console.log("yes")
+  // User is signed in.
+} else {
+  // No user is signed in.
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -95,14 +134,23 @@ Accept:"application/json",
 body:JSON.stringify({user})
 }
 */
-
+console.log("hi")
 document.getElementById("user-signedout-btns").style.display = "none"
 
 document.getElementById("user-signedin-btns").style.display = "flex"
+let profileLink = document.getElementById("user-profile")
+
+profileLink.setAttribute("href", "/user/" + user.email)
+ /*document.getElementById("user-profile").addEventListener("click", function(){
+
+window.location.replace("/user/" + user.email)
 
 
 
+})
+*/
   } else {
+
   document.getElementById("user-signedout-btns").style.display = "flex"
 
 document.getElementById("user-signedin-btns").style.display = "none"

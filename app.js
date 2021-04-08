@@ -20,12 +20,6 @@ var firebaseapp = admin.initializeApp();
 
 
 
-function isAuth(){
-var user = firebase.auth().currentUser;
-return user
-
-
-}
 
 
 //middleware
@@ -34,6 +28,7 @@ app.use(express.static((__dirname)));
 //being able t get stuff from formns
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json());
+
 
 //setting a port with heroku or local
 var PORT = process.env.PORT || 5500
@@ -47,51 +42,85 @@ app.set("views", "pages")
  
 app.get("/", function(req,res) {
 
-res.render("index")
+res.render("index", {foo:"no"})
 
 })
 
-app.post("/user-signin", ((req,res) => {
 
 
-db.collection("users").onSnapshot((querySnapshot) => {
 
-querySnapshot.forEach((doc) => {
-if(doc.id == req.body.uid){
+
+/*
+app.get('/', function(req, res){
+currentPrice = 0
+grandTotal = 0
+
+    res.render('test' , {
+        currentPrice,
+        grandTotal,
+foo:"old"
+    });
+});
+
+app.post('/set-price', function(req, res){
+    let price = req.body.price;
+    currentPrice = price;
+grandTotal = 0
+    res.render('test' , {
+        currentPrice,
+        grandTotal,
+foo:"new"
+    });
+});
+*/
+
+
+app.post("/user-signin", async function(req,res) {
+
+
 console.log(req.body)
 
-let userinfo = req.body
-
-
-res.send(req.params)
 
 
 
+res.render("index", {foo:"hi"})
 
-} else {
 
 
-}
 
-})
+
+
 
 })
 
 
 
 
-}))
 
 app.get("/user/:id", function (req,res){
-res.render("user")
 
 
 
 
-//console.log(req.params.id)
+
+res.render("user", {email:req.params.id})
+
+
+
+
+console.log(req.params)
 
 })
 
+app.get("/create", function (req,res){
+res.render("create")
+
+
+
+
+console.log(req.params)
+
+})
 
 
 
@@ -121,9 +150,22 @@ res.status(404).render("404")
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 app.listen(PORT, "127.0.0.1")
 
 
 console.log("listening on http://127.0.0.1:" + PORT + "/")
+
+
 
 

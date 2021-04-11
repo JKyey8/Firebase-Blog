@@ -18,11 +18,28 @@ var auth = firebase.auth();
 
 var express = require('express');
 
-var app = express();
+var http = require("http");
+
+var path = require("path");
 
 var admin = require("firebase-admin");
 
-var firebaseapp = admin.initializeApp(); //middleware
+var firebaseapp = admin.initializeApp();
+
+var reload = require("reload");
+
+var liverereload = require("livereload");
+
+var connectLivereload = require("connect-livereload"); //live reload when change
+//const publicDirectory = path.join(__dirname,"public")
+//var liveReloadServer = liverereload.createServer();
+//liveReloadServer.watch(publicDirectory)
+
+
+var app = express(); //middleware
+//more live reloading
+//app.use(connectLivereload())
+//app.use(express.static(publicDirectory))
 //static files
 
 app.use(express["static"](__dirname)); //being able t get stuff from formns
@@ -95,8 +112,9 @@ app.get("/create", function (req, res) {
 app.post("/newblog", function (req, res) {
   console.log(req.body);
 });
+app.listen(PORT, "127.0.0.1");
+console.log("listening on http://127.0.0.1:" + PORT + "/");
+reload(app);
 app.use(function (req, res) {
   res.status(404).render("404");
 });
-app.listen(PORT, "127.0.0.1");
-console.log("listening on http://127.0.0.1:" + PORT + "/");

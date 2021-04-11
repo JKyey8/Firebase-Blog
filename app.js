@@ -13,16 +13,31 @@ var firebaseConfig = {
 const db = firebase.firestore();
 const auth = firebase.auth();
 const express = require('express')
-const app = express();
+const http = require("http")
+const path = require("path")
 var admin = require("firebase-admin")
 var firebaseapp = admin.initializeApp();
+const reload = require("reload")
+const liverereload = require("livereload")
+const connectLivereload = require("connect-livereload")
+
+//live reload when change
+//const publicDirectory = path.join(__dirname,"public")
+
+//var liveReloadServer = liverereload.createServer();
+//liveReloadServer.watch(publicDirectory)
 
 
 
 
 
-
+const app = express();
 //middleware
+
+//more live reloading
+//app.use(connectLivereload())
+//app.use(express.static(publicDirectory))
+
 //static files
 app.use(express.static((__dirname)));
 //being able t get stuff from formns
@@ -133,6 +148,11 @@ console.log(req.body)
 
 
 
+app.listen(PORT, "127.0.0.1")
+console.log("listening on http://127.0.0.1:" + PORT + "/")
+
+
+reload(app)
 
 
 
@@ -147,24 +167,6 @@ res.status(404).render("404")
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(PORT, "127.0.0.1")
-
-
-console.log("listening on http://127.0.0.1:" + PORT + "/")
 
 
 

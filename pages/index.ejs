@@ -20,7 +20,7 @@
 
 
 
-<h1>Blog Site <%= foo %></h1>
+<h1>Blog Site popy  <%= foo %></h1>
 <form id="searchbar">
   <div class=”search-box”>
     <input type=”text”  id = "searchinput" class=”search-by-name” name=”searchinput” placeholder= "Search Blog by Title">
@@ -33,7 +33,7 @@
 
 <a href="/create" id="newpost">New Post</a>
 <button id="logoutbtn">Log Out</button>
-<a id="user-profile"   >Profile</a>
+<a id="user-profile" >Profile</a>
 </div>
 <div id="user-signedout-btns">
 <button class="user-btn" id="loginbtn">Log In</button>
@@ -49,7 +49,7 @@
 
 <div class="user-portal" id="signup-page">
 <button id="close-signup">CLOSE</button>
-<form id="signup-form">
+<form id="signup-form" class="authstateform">
 
 <input type="email" id="email-signup" name="email-signup" placeholder="Email:"></input>
 <input type="password" id="password-signup" name="password-signup" placeholder="Password:"></input>
@@ -63,7 +63,7 @@
 <div class="user-portal" id="login-page">
 <button id="close-login">CLOSE</button>
 <p>Hey there</p>
-<form id="login-form"  action="/user-signin" method="post" >
+<form id="login-form" class="authstateform"  action="/user-signin" method="post" >
 
 <input type="email" id="email-login" name="emailLI" placeholder="Email:"></input>
 <input type="password" id="password-login" name="passwordLI" placeholder="Password:"></input>
@@ -118,7 +118,7 @@ const auth = firebase.auth();
 
 <script defer src="/assets/scripts/dist/data.js"></script>
 <script src="/assets/scripts/dist/auth.js"></script>
-
+<script src="/reload/reload.js"></script>
 
 
 

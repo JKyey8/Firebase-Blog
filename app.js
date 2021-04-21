@@ -18,14 +18,7 @@ const path = require("path")
 var admin = require("firebase-admin")
 var firebaseapp = admin.initializeApp();
 const reload = require("reload")
-const liverereload = require("livereload")
-const connectLivereload = require("connect-livereload")
 
-//live reload when change
-//const publicDirectory = path.join(__dirname,"public")
-
-//var liveReloadServer = liverereload.createServer();
-//liveReloadServer.watch(publicDirectory)
 
 
 
@@ -151,7 +144,7 @@ console.log(req.body)
 app.listen(PORT, "127.0.0.1")
 console.log("listening on http://127.0.0.1:" + PORT + "/")
 
-
+//get app to reload when chanes are made(look at package.json)
 reload(app)
 
 

@@ -28,14 +28,6 @@ var firebaseapp = admin.initializeApp();
 
 var reload = require("reload");
 
-var liverereload = require("livereload");
-
-var connectLivereload = require("connect-livereload"); //live reload when change
-//const publicDirectory = path.join(__dirname,"public")
-//var liveReloadServer = liverereload.createServer();
-//liveReloadServer.watch(publicDirectory)
-
-
 var app = express(); //middleware
 //more live reloading
 //app.use(connectLivereload())
@@ -113,7 +105,8 @@ app.post("/newblog", function (req, res) {
   console.log(req.body);
 });
 app.listen(PORT, "127.0.0.1");
-console.log("listening on http://127.0.0.1:" + PORT + "/");
+console.log("listening on http://127.0.0.1:" + PORT + "/"); //get app to reload when chanes are made(look at package.json)
+
 reload(app);
 app.use(function (req, res) {
   res.status(404).render("404");

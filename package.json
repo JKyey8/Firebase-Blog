@@ -57,7 +57,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "nodemon app.js -e ejs,ts,js,css,html,jpg,png,scss",
+    "start": "nodemon app.js -e ejs,ts,js,css,html,jpg,png,scss, node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

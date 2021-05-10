@@ -41,6 +41,7 @@ app.use(express.json());
 //setting a port with heroku or local
 var PORT = process.env.PORT || 5500
 
+module.exports = app;
 
 //adding view engine(ejs)
 app.set("view engine", "ejs")
@@ -50,7 +51,7 @@ app.set("views", "pages")
  
 app.get("/", function(req,res) {
 
-res.render("index", {foo:"no"})
+res.render("index") 
 
 })
 
@@ -141,7 +142,7 @@ console.log(req.body)
 
 
 
-app.listen(PORT, "127.0.0.1")
+app.listen(PORT)
 console.log("listening on http://127.0.0.1:" + PORT + "/")
 
 //get app to reload when chanes are made(look at package.json)
